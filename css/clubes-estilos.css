@@ -1,0 +1,298 @@
+/* ============================================
+   CLUBES-ESTILOS: ESTILOS ESPECÍFICOS DE CLUBES
+   ============================================ */
+
+/* Responsive: este archivo cambia grid/tamaño de tarjetas en @media (1024px, 900px, 768px, 480px) */
+
+/* Main container */
+.clubes-main {
+    margin: 0 auto;
+    padding: 0;
+    height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    width: 100%;
+}
+
+/* Grid de clubes */
+.clubes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    gap: 0;
+}
+
+/* Tarjeta individual */
+.clube-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Imagen de fondo */
+.clube-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+}
+
+.clube-card:hover .clube-image {
+    transform: scale(1.05);
+}
+
+/* Overlay con etiqueta */
+.clube-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(7, 38, 74, 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.4s ease;
+    z-index: 10;
+}
+
+.clube-card:hover .clube-overlay,
+.clube-card.active .clube-overlay {
+    background: rgba(7, 38, 74, 0.7);
+}
+
+/* Etiqueta de texto */
+.clube-label {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.4
+    s ease, transform 0.4s ease;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.clube-card:hover .clube-label,
+.clube-card.active .clube-label {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Estilos específicos por lado */
+.clube-card-left {
+    border-right: 1px solid rgba(7, 38, 74, 0.1);
+}
+
+.clube-card-right {
+    border-left: 1px solid rgba(7, 38, 74, 0.1);
+}
+
+/* Responsive: puntos de quiebre para adaptar tarjetas y columnas a pantallas pequeñas */
+@media (max-width: 1024px) {
+    .clubes-main {
+        gap: 15px;
+    }
+    
+    .clubes-context {
+        width: 150px;
+        padding: 0 20px;
+    }
+    
+    .clubes-context h3 {
+        font-size: 1.5rem;
+    }
+    
+    .clubes-context p {
+        font-size: 0.9rem;
+    }
+    
+    .clubes-grid {
+        width: 95%;
+        max-width: 900px;
+        height: 100%;
+    }
+    
+    .clube-label {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .clubes-main {
+        flex-direction: column;
+        gap: 0;
+        height: auto;
+        min-height: calc(100vh - 72px);
+        padding: 20px 0;
+    }
+    
+    .clubes-context {
+        display: none;
+    }
+    
+    .clubes-grid {
+        grid-template-columns: 1fr;
+        width: 95%;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .clube-card {
+        min-height: 300px;
+        height: 300px;
+    }
+    
+    .clube-card-left,
+    .clube-card-right {
+        border: none;
+    }
+    
+    .clube-label {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .clubes-main {
+        padding: 15px 0;
+    }
+
+    .clubes-grid {
+        width: 100%;
+    }
+
+    .clube-card {
+        min-height: 250px;
+        height: 250px;
+    }
+    
+    .clube-label {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animación de doble clic */
+@keyframes doubleClickPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.clube-card.double-click .clube-label {
+    animation: doubleClickPulse 0.6s ease;
+}
+
+.clubes-detalle-main {
+    width: min(1180px, 94%);
+    margin: 28px auto 40px;
+}
+
+.clubes-detalle-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.club-card {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border: 2px solid #07264a;
+    background: #ffffff;
+    overflow: hidden;
+    min-height: 220px;
+}
+
+.club-image-button {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    width: 100%;
+    cursor: pointer;
+    flex: 1 1 auto;
+    transition: flex-basis 0.35s ease, width 0.35s ease;
+}
+
+.club-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    object-fit: cover;
+}
+
+.club-info {
+    width: 0;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
+    transform: translateX(10px);
+    transition: width 0.35s ease, max-height 0.35s ease, opacity 0.25s ease, transform 0.35s ease, padding 0.35s ease;
+    border-left: 0 solid #07264a;
+}
+
+.club-info h3 {
+    margin: 0 0 8px;
+    color: #07264a;
+    font-size: 1.3rem;
+}
+
+.club-info p {
+    margin: 0 0 8px;
+    color: #1f2937;
+    line-height: 1.45;
+}
+
+.club-card.is-open .club-image-button {
+    flex: 0 0 42%;
+}
+
+.club-card.is-open .club-info {
+    width: 58%;
+    max-height: 600px;
+    opacity: 1;
+    transform: translateX(0);
+    padding: 22px 24px;
+    border-left-width: 2px;
+}
+
+@media (max-width: 900px) {
+    .club-card {
+        flex-direction: column;
+    }
+
+    .club-image {
+        min-height: 180px;
+    }
+
+    .club-card.is-open .club-image-button {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+
+    .club-card.is-open .club-info {
+        width: 100%;
+        max-height: 800px;
+        border-left-width: 0;
+        border-top: 2px solid #07264a;
+    }
+}

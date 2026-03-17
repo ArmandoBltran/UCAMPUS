@@ -1,0 +1,218 @@
+﻿<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Responsive: permite que el layout se adapte al ancho real del dispositivo -->
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="Clubes Culturales Universidad Carolina - UCAMPUS.">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/estiloscomunes.css">
+        <link rel="stylesheet" href="css/inicio-estilos.css">
+        <link rel="stylesheet" href="css/clubes-estilos.css">
+        <title>Clubes Culturales | UCAMPUS</title>
+    </head>
+    <body>
+        <script src="js/common-nav.js"></script>
+        <!-- Sidebar izquierdo -->
+        <aside class="sidebar sidebar-left">
+            <ul class="important-links">
+                <li><a href="https://ucarolina.edu.mx/" target="_blank" rel="non" aria-label="Google"><img src="https://img.icons8.com/material-outlined/96/000000/google-logo.png" alt="Google"></a></li>
+                <li><a href="https://www.linkedin.com/company/universidad-carolina/" target="_blank" rel="non" aria-label="LinkedIn"><img src="https://img.icons8.com/material-outlined/96/000000/linkedin.png" alt="LinkedIn"></a></li>
+                <li><a href="https://x.com/UCarolinaMx" target="_blank" rel="non" aria-label="Twitter"><img src="https://img.icons8.com/material-outlined/96/000000/twitter.png" alt="Twitter"></a></li>
+                <li><a href="https://www.instagram.com/universidadcarolina?igsh=MW00M20zb3Z4aGFicw==" target="_blank" rel="non" aria-label="Instagram"><img src="https://img.icons8.com/material-outlined/96/000000/instagram.png" alt="Instagram"></a></li>
+                <li><a href="https://web.facebook.com/UniversidadCarolina/?_rdc=1&_rdr#" target="_blank" rel="non" aria-label="Facebook"><img src="https://img.icons8.com/material-outlined/96/000000/facebook.png" alt="Facebook"></a></li>
+            </ul>
+        </aside>
+        <header>
+            <div class="header-inner">
+                <a href="inicio.html" class="logo">
+                    <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" width="80" height="80" alt="Logo Universidad Carolina">
+                    <h2 class="Nombre">UCAMPUS</h2>
+                </a>
+                <!-- Responsive: botón que aparece/funciona como menú móvil en pantallas pequeñas -->
+                <button class="hamburger-menu" id="hamburger" aria-label="Menú" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Responsive: menú alterno para navegación móvil -->
+                <nav id="nav-menu" class="nav-closed nav-desktop">
+                    <ul class="nav-menu">
+                        <li><a href="inicio.html" class="nav-link">Inicio</a></li>
+                        <li><a href="admisiones.html" class="nav-link">Admisiones</a></li>
+                        <li class="nav-item-dropdown">
+                            <a href="clubes.html" class="nav-link">Clubes</a>
+                            <ul class="nav-submenu">
+                                <li><a href="clubes-deportivos.html">Deportivos</a></li>
+                                <li><a href="clubes-culturales.html">Culturales</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="tramites.html" class="nav-link">Trámites</a></li>
+                        <li><a href="https://i-escolar.com/muralweb/login/" class="nav-link" target="_blank" rel="noopener">Innovat</a></li>
+                    </ul>
+                </nav>
+                <!-- Menú móvil tipo navegador con flechas -->
+                <div id="nav-mobile" class="nav-mobile">
+                    <button class="nav-mobile-prev" id="nav-prev" aria-label="Anterior">&#10094;</button>
+                    <div class="nav-mobile-display">
+                        <span class="nav-mobile-item" data-link="inicio.html">Inicio</span>
+                        <span class="nav-mobile-item" data-link="admisiones.html">Admisiones</span>
+                        <span class="nav-mobile-item" data-link="clubes-deportivos.html">Deportivos</span>
+                        <span class="nav-mobile-item" data-link="clubes-culturales.html">Culturales</span>
+                        <span class="nav-mobile-item" data-link="tramites.html">Trámites</span>
+                        <span class="nav-mobile-item" data-link="https://i-escolar.com/muralweb/login/">Innovat</span>
+                    </div>
+                    <button class="nav-mobile-next" id="nav-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+            </div>
+        </header>
+        <main class="clubes-detalle-main">
+            <section class="clubes-detalle-lista" aria-label="Listado de clubes culturales">
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Artes+Escenicas" alt="Club de Artes Escénicas">
+                    </button>
+                    <div class="club-info">
+                        <h3>Artes Escénicas</h3>
+                        <p>Expresión teatral, interpretación y montaje para presentaciones artísticas universitarias.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Artes+Plasticas" alt="Club de Artes Plásticas">
+                    </button>
+                    <div class="club-info">
+                        <h3>Artes Plásticas</h3>
+                        <p>Experimentación en dibujo, pintura y técnicas visuales para el desarrollo creativo.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Baile+Moderno" alt="Club de Baile Moderno">
+                    </button>
+                    <div class="club-info">
+                        <h3>Baile Moderno</h3>
+                        <p>Coreografías contemporáneas con trabajo rítmico y coordinación grupal.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Danza+Aerea" alt="Club de Danza Aérea">
+                    </button>
+                    <div class="club-info">
+                        <h3>Danza Aérea</h3>
+                        <p>Entrenamiento de fuerza, flexibilidad y técnica corporal en disciplinas aéreas.</p>
+                        <p><strong>Nivel:</strong> Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Danza+Folclorica" alt="Club de Danza Folclórica">
+                    </button>
+                    <div class="club-info">
+                        <h3>Danza Folclórica</h3>
+                        <p>Difusión de tradiciones mexicanas mediante repertorio regional y presentaciones.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Escritura+Creativa" alt="Club de Escritura Creativa">
+                    </button>
+                    <div class="club-info">
+                        <h3>Escritura Creativa</h3>
+                        <p>Taller de narrativa y poesía para fortalecer voz, estilo y técnica literaria.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Modelo+ONU" alt="Club Modelo de las Naciones Unidas">
+                    </button>
+                    <div class="club-info">
+                        <h3>Modelo de las Naciones Unidas</h3>
+                        <p>Debate y diplomacia académica para simulaciones de comités internacionales.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Musica" alt="Club de Música">
+                    </button>
+                    <div class="club-info">
+                        <h3>Música</h3>
+                        <p>Práctica instrumental y ensamble para presentaciones dentro y fuera del campus.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+
+                <article class="club-card" data-club-card>
+                    <button class="club-image-button" type="button" aria-expanded="false">
+                        <img class="club-image" src="https://placehold.co/960x420?text=Tecnica+Vocal" alt="Club de Técnica Vocal">
+                    </button>
+                    <div class="club-info">
+                        <h3>Técnica Vocal</h3>
+                        <p>Entrenamiento de respiración, afinación e interpretación para canto solista y grupal.</p>
+                        <p><strong>Nivel:</strong> Preparatoria y Nivel Superior</p>
+                        <p><strong>Rama:</strong> Femenil y varonil</p>
+                    </div>
+                </article>
+            </section>
+        </main>
+        <footer class="site-footer" role="contentinfo">
+            <div class="container">
+                <div class="footer-col">
+                    <div class="brand">
+                        <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" alt="Logo Universidad Carolina">
+                        <div>
+                            <h3>Universidad Carolina</h3>
+                            <p>En todo, Amar y Servir — Formación académica con vocación social.</p>
+                        </div>
+                    </div>
+                    <p class="contact">
+                        <small>Campus Principal</small>
+                        Calz. Antonio Narro N°707<br>
+                        Saltillo, Coahuila • C.P. 25000<br>
+                        <a href="tel:+521000000000">(+52) 844 414 1435</a><br>
+                        <a href="mailto:contacto@ucampus.edu.mx">contacto@ucarolina.edu.mx</a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                          <li><a href="inicio.html">Inicio</a></li>
+                        <li><a href="admisiones.html">Admisiones</a></li>
+                        <li><a href="clubes.html">Clubes</a></li>
+                        <li><a href="tramites.html">Trámites</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <small>© <span id="year">2025</span> Universidad Carolina. Todos los derechos reservados. <a href="#">Aviso de privacidad</a> • <a href="#">Términos</a></small>
+                </div>
+            </div>
+        </footer>
+    </body>
+    <script src="js/clubes.js"></script>
+</html>
+
+

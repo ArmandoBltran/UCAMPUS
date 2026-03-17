@@ -1,0 +1,159 @@
+﻿<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Responsive: permite que el layout se adapte al ancho real del dispositivo -->
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="Trámites Universidad Carolina - UCAMPUS. Procesos académicos y administrativos.">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/estiloscomunes.css">
+        <link rel="stylesheet" href="css/inicio-estilos.css">
+        <link rel="stylesheet" href="css/tramites-estilos.css">
+        <title>Trámites | UCAMPUS</title>
+    </head>
+    <body>
+        <script src="js/common-nav.js"></script>
+        <!-- Sidebar izquierdo -->
+        <aside class="sidebar sidebar-left">
+            <ul class="important-links">
+                <li><a href="https://ucarolina.edu.mx/" target="_blank" rel="noopener noreferrer" aria-label="Google"><img src="https://img.icons8.com/material-outlined/96/000000/google-logo.png" alt="Google"></a></li>
+                <li><a href="https://www.linkedin.com/company/universidad-carolina/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="https://img.icons8.com/material-outlined/96/000000/linkedin.png" alt="LinkedIn"></a></li>
+                <li><a href="https://x.com/UCarolinaMx" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><img src="https://img.icons8.com/material-outlined/96/000000/twitter.png" alt="Twitter"></a></li>
+                <li><a href="https://www.instagram.com/universidadcarolina?igsh=MW00M20zb3Z4aGFicw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="https://img.icons8.com/material-outlined/96/000000/instagram.png" alt="Instagram"></a></li>
+                <li><a href="https://web.facebook.com/UniversidadCarolina/?_rdc=1&_rdr#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><img src="https://img.icons8.com/material-outlined/96/000000/facebook.png" alt="Facebook"></a></li>
+            </ul>
+        </aside>
+        <header>
+            <div class="header-inner">
+                <a href="inicio.html" class="logo">
+                    <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" width="80" height="80" alt="Logo Universidad Carolina">
+                    <h2 class="Nombre">UCAMPUS</h2>
+                </a>
+                <!-- Responsive: botón que aparece/funciona como menú móvil en pantallas pequeñas -->
+                <button class="hamburger-menu" id="hamburger" aria-label="Menú" aria-expanded="false" aria-controls="nav-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Responsive: menú alterno para navegación móvil -->
+                <nav id="nav-menu" class="nav-closed nav-desktop">
+                    <ul class="nav-menu">
+                        <li><a href="inicio.html" class="nav-link">Inicio</a></li>
+                        <li><a href="admisiones.html" class="nav-link">Admisiones</a></li>
+                        <li class="nav-item-dropdown">
+                            <a href="clubes.html" class="nav-link">Clubes</a>
+                            <ul class="nav-submenu">
+                                <li><a href="clubes-deportivos.html">Deportivos</a></li>
+                                <li><a href="clubes-culturales.html">Culturales</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="tramites.html" class="nav-link">Trámites</a></li>
+                        <li><a href="https://i-escolar.com/muralweb/login/" class="nav-link" target="_blank" rel="noopener">Innovat</a></li>
+                    </ul>
+                </nav>
+                <!-- Menú móvil tipo navegador con flechas -->
+                <div id="nav-mobile" class="nav-mobile">
+                    <button class="nav-mobile-prev" id="nav-prev" aria-label="Anterior">&#10094;</button>
+                    <div class="nav-mobile-display">
+                        <span class="nav-mobile-item" data-link="inicio.html">Inicio</span>
+                        <span class="nav-mobile-item" data-link="admisiones.html">Admisiones</span>
+                        <span class="nav-mobile-item" data-link="clubes-deportivos.html">Deportivos</span>
+                        <span class="nav-mobile-item" data-link="clubes-culturales.html">Culturales</span>
+                        <span class="nav-mobile-item" data-link="tramites.html">Trámites</span>
+                        <span class="nav-mobile-item" data-link="https://i-escolar.com/muralweb/login/">Innovat</span>
+                    </div>
+                    <button class="nav-mobile-next" id="nav-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="tramites-intro">
+                <h1>Trámites en Universidad Carolina</h1>
+                <p>En la Universidad Carolina, nos comprometemos a facilitar tus trámites académicos y administrativos para que puedas enfocarte en tu formación y desarrollo. Desde inscripciones hasta solicitudes de becas, nuestro sistema de trámites está diseñado para ser eficiente, transparente y accesible.</p>
+                <p>Explora nuestra sección de trámites para conocer los requisitos, procedimientos y plazos para cada tipo de trámite. Nuestro equipo de atención al estudiante está siempre disponible para ayudarte en cada paso del proceso. ¡Tu éxito es nuestra prioridad!</p>
+            </section>
+
+            <section class="agenda-section" aria-labelledby="agenda-title">
+                <div class="agenda-card">
+                    <h2 id="agenda-title">Agenda tu cita</h2>
+                    <form id="appointment-form" class="appointment-form" novalidate>
+                        <div class="appointment-grid">
+                            <div class="appointment-fields">
+                                <label class="visually-hidden" for="appointment-name">Tu nombre</label>
+                                <input id="appointment-name" name="name" type="text" placeholder="Tu nombre" required>
+                                <label class="visually-hidden" for="appointment-email">Correo electrónico</label>
+                                <input id="appointment-email" name="email" type="email" placeholder="ejemplo@mail.com" required>
+                                
+                                <label for="appointment-service">Servicio</label>
+                                <select id="appointment-service" name="service" required>
+                                    <option value="" selected disabled>Selecciona un servicio</option>
+                                    <option value="inscripcion">Inscripción o reinscripción</option>
+                                    <option value="constancia">Constancias y documentos</option>
+                                    <option value="beca">Solicitud de beca</option>
+                                    <option value="asesoria">Asesoría académica</option>
+                                </select>
+
+                                <label for="appointment-date">Fecha y hora</label>
+                                <div class="date-time-row">
+                                    <input id="appointment-date" name="date" type="date" required>
+                                </div>
+                                <input id="appointment-time" name="time" type="hidden">
+                                <p id="selected-time-text" class="selected-time-text">Horario seleccionado: ninguno</p>
+                            </div>
+
+                            <aside class="appointment-slots" aria-label="Horarios disponibles">
+                                <button type="button" class="slot-btn" data-time="09:00">9:00 AM</button>
+                                <button type="button" class="slot-btn" data-time="10:00">10:00 AM</button>
+                                <button type="button" class="slot-btn" data-time="11:00">11:00 AM</button>
+                                <button type="button" class="slot-btn" data-time="12:00">12:00 PM</button>
+                                <button type="button" class="slot-btn" data-time="13:00">1:00 PM</button>
+                                <button type="button" class="slot-btn" data-time="14:00">2:00 PM</button>
+                                <button type="button" class="slot-btn" data-time="15:00">3:00 PM</button>
+                            </aside>
+                        </div>
+
+                        <button type="submit" class="confirm-btn">Confirmar cita</button>
+                        <p id="appointment-message" class="appointment-message" aria-live="polite"></p>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer" role="contentinfo">
+            <div class="container">
+                <div class="footer-col">
+                    <div class="brand">
+                        <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" alt="Logo Universidad Carolina">
+                        <div>
+                            <h3>Universidad Carolina</h3>
+                            <p>En todo, Amar y Servir — Formación académica con vocación social.</p>
+                        </div>
+                    </div>
+                    <p class="contact">
+                        <small>Campus Principal</small>
+                        Calz. Antonio Narro N°707<br>
+                        Saltillo, Coahuila • C.P. 25000<br>
+                        <a href="tel:+521000000000">(+52) 844 414 1435</a><br>
+                        <a href="mailto:contacto@ucampus.edu.mx">contacto@ucarolina.edu.mx</a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                         <li><a href="inicio.html">Inicio</a></li>
+                        <li><a href="admisiones.html">Admisiones</a></li>
+                        <li><a href="clubes.html">Clubes</a></li>
+                        <li><a href="tramites.html">Trámites</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <small>© <span id="year">2025</span> Universidad Carolina. Todos los derechos reservados. <a href="#">Aviso de privacidad</a> • <a href="#">Términos</a></small>
+                </div>
+            </div>
+        </footer>
+        <script src="js/tramites.js"></script>
+    </body>
+</html>
+
+

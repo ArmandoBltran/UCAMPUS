@@ -1,0 +1,150 @@
+﻿<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Responsive: permite que el layout se adapte al ancho real del dispositivo -->
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="Bachillerato - Admisiones en Universidad Carolina - UCAMPUS.">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/estiloscomunes.css">
+        <link rel="stylesheet" href="css/inicio-estilos.css">
+        <link rel="stylesheet" href="css/admisiones-estilos.css">
+        <title>Bachillerato - Admisiones | UCAMPUS</title>
+    </head>
+    <body>
+        <script src="js/common-nav.js"></script>
+        <!-- Sidebar izquierdo -->
+        <aside class="sidebar sidebar-left">
+            <ul class="important-links">
+                <li><a href="https://ucarolina.edu.mx/" target="_blank" rel="non" aria-label="Google"><img src="https://img.icons8.com/material-outlined/96/000000/google-logo.png" alt="Google"></a></li>
+                <li><a href="https://www.linkedin.com/company/universidad-carolina/" target="_blank" rel="non" aria-label="LinkedIn"><img src="https://img.icons8.com/material-outlined/96/000000/linkedin.png" alt="LinkedIn"></a></li>
+                <li><a href="https://x.com/UCarolinaMx" target="_blank" rel="non" aria-label="Twitter"><img src="https://img.icons8.com/material-outlined/96/000000/twitter.png" alt="Twitter"></a></li>
+                <li><a href="https://www.instagram.com/universidadcarolina?igsh=MW00M20zb3Z4aGFicw==" target="_blank" rel="non" aria-label="Instagram"><img src="https://img.icons8.com/material-outlined/96/000000/instagram.png" alt="Instagram"></a></li>
+                <li><a href="https://web.facebook.com/UniversidadCarolina/?_rdc=1&_rdr#" target="_blank" rel="non" aria-label="Facebook"><img src="https://img.icons8.com/material-outlined/96/000000/facebook.png" alt="Facebook"></a></li>
+            </ul>
+        </aside>
+        <header>
+            <div class="header-inner">
+                <a href="inicio.html" class="logo">
+                    <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" width="80" height="80" alt="Logo Universidad Carolina">
+                    <h2 class="Nombre">UCAMPUS</h2>
+                </a>
+                <!-- Responsive: botón que aparece/funciona como menú móvil en pantallas pequeñas -->
+                <button class="hamburger-menu" id="hamburger" aria-label="Menú" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Responsive: menú alterno para navegación móvil -->
+                <nav id="nav-menu" class="nav-closed nav-desktop">
+                    <ul class="nav-menu">
+                        <li><a href="inicio.html" class="nav-link">Inicio</a></li>
+                        <li><a href="admisiones.html" class="nav-link">Admisiones</a></li>
+                        <li class="nav-item-dropdown">
+                            <a href="clubes.html" class="nav-link">Clubes</a>
+                            <ul class="nav-submenu">
+                                <li><a href="clubes-deportivos.html">Deportivos</a></li>
+                                <li><a href="clubes-culturales.html">Culturales</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="tramites.html" class="nav-link">Trámites</a></li>
+                        <li><a href="https://i-escolar.com/muralweb/login/" class="nav-link" target="_blank" rel="noopener">Innovat</a></li>
+                    </ul>
+                </nav>
+                <!-- Menú móvil tipo navegador con flechas -->
+                <div id="nav-mobile" class="nav-mobile">
+                    <button class="nav-mobile-prev" id="nav-prev" aria-label="Anterior">&#10094;</button>
+                    <div class="nav-mobile-display">
+                        <span class="nav-mobile-item" data-link="inicio.html">Inicio</span>
+                        <span class="nav-mobile-item" data-link="admisiones.html">Admisiones</span>
+                        <span class="nav-mobile-item" data-link="clubes-deportivos.html">Deportivos</span>
+                        <span class="nav-mobile-item" data-link="clubes-culturales.html">Culturales</span>
+                        <span class="nav-mobile-item" data-link="tramites.html">Trámites</span>
+                        <span class="nav-mobile-item" data-link="https://i-escolar.com/muralweb/login/">Innovat</span>
+                    </div>
+                    <button class="nav-mobile-next" id="nav-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="admisiones-intro">
+                <h1 id="adm-title">Admisiones a Bachillerato en Universidad Carolina</h1>
+                <p id="adm-description-1">En la Universidad Carolina, nuestro programa de Bachillerato está diseñado para brindar a los estudiantes una educación integral que los prepare para los desafíos académicos y profesionales del futuro. Nuestro enfoque se centra en el desarrollo de habilidades críticas, el pensamiento analítico y la formación ética, todo dentro de un ambiente de aprendizaje estimulante y colaborativo.</p>
+                <p id="adm-description-2">Si estás interesado en formar parte de nuestra comunidad estudiantil, te invitamos a explorar los requisitos de admisión, el proceso de solicitud y las fechas importantes. Nuestro equipo de admisiones está disponible para ayudarte en cada paso del camino. ¡Únete a nosotros y comienza tu viaje hacia un futuro brillante con la Universidad Carolina!</p>
+            </section>
+
+            <section class="adm-tabs" aria-label="Selector de nivel académico">
+                <button class="adm-tab is-active" type="button" data-level="bachillerato" aria-pressed="true">Bachillerato</button>
+                <button class="adm-tab" type="button" data-level="ingenierias" aria-pressed="false">Ingenierías</button>
+                <button class="adm-tab" type="button" data-level="licenciaturas" aria-pressed="false">Licenciaturas</button>
+                <button class="adm-tab" type="button" data-level="maestrias" aria-pressed="false">Maestrías</button>
+            </section>
+
+            <section class="bach-grid" aria-label="Oferta de admisiones">
+                <article class="bach-card">
+                    <h2 id="left-card-title">Programas de Bachillerato</h2>
+                    <ul id="left-card-list"></ul>
+                    <p class="bach-meta" id="left-card-meta">Plan semestral | Duración 3 años | Horario matutino</p>
+                    <div class="bach-prices" id="left-card-prices" aria-label="Costos y beneficios">
+                        <span>Inscripción <strong>$1,040</strong></span>
+                        <span>Inversión mensual <strong>$3,291</strong></span>
+                        <span>Sin examen de admisión</span>
+                    </div>
+                </article>
+
+                <article class="bach-card bach-info-panel" id="bach-info-panel" aria-live="polite">
+                    <h2 id="right-card-title">Información General</h2>
+                    <p id="right-card-body">Selecciona un nivel académico para ver sus detalles de admisión.</p>
+                    <div class="bach-detail-list" id="right-card-details"></div>
+                    <details id="right-card-profile-details" class="bach-profile-details" hidden>
+                        <summary id="right-card-profile-toggle">Ver perfil de egreso</summary>
+                        <p id="right-card-profile-text" class="bach-profile-text"></p>
+                        <a id="right-card-plan" class="btn btn--ghost bach-plan-btn" href="#" target="_blank" rel="noopener">
+                            Ver plan de estudios
+                        </a>
+                    </details>
+                    <a id="right-card-pdf" class="btn" href="#" target="_blank" rel="noopener" hidden>
+                        Ver PDF del programa
+                    </a>                </article>
+            </section>
+        </main>
+        <script src="js/admisiones.js"></script>
+        <footer class="site-footer" role="contentinfo">
+            <div class="container">
+                <div class="footer-col">
+                    <div class="brand">
+                        <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" alt="Logo Universidad Carolina">
+                        <div>
+                            <h3>Universidad Carolina</h3>
+                            <p>En todo, Amar y Servir — Formación académica con vocación social.</p>
+                        </div>
+                    </div>
+                    <p class="contact">
+                        <small>Campus Principal</small>
+                        Calz. Antonio Narro N°707<br>
+                        Saltillo, Coahuila • C.P. 25000<br>
+                        <a href="tel:+5218444141435">(+52) 844 414 1435</a><br>
+                        <a href="mailto:contacto@ucampus.edu.mx">contacto@ucarolina.edu.mx</a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                          <li><a href="inicio.html">Inicio</a></li>
+                        <li><a href="admisiones.html">Admisiones</a></li>
+                        <li><a href="clubes.html">Clubes</a></li>
+                        <li><a href="tramites.html">Trámites</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <small>© <span id="year">2025</span> Universidad Carolina. Todos los derechos reservados. <a href="#">Aviso de privacidad</a> • <a href="#">Términos</a></small>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+
+
+

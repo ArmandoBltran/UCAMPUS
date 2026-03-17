@@ -1,0 +1,90 @@
+.adm-tabs {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 1.25rem auto 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
+.adm-tab {
+    border: 2px solid #0f172a;
+    background: #ffffff;
+    color: #0f172a;
+    border-radius: 999px;
+    padding: 0.55rem 1rem;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.adm-tab:hover,
+.adm-tab:focus-visible {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.15);
+    outline: none;
+}
+
+.adm-tab.is-active {
+    background: #0f172a;
+    color: #ffffff;
+}
+
+.bach-option {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    padding: 0.55rem 0.75rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.bach-option:hover,
+.bach-option:focus-visible {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    outline: none;
+}
+
+.bach-option.is-active {
+    border-color: #0f172a;
+    background: #e2e8f0;
+}
+
+.bach-profile-details {
+    margin-top: 0.75rem;
+}
+
+.bach-profile-text {
+    margin: 0.65rem 0;
+}
+
+.bach-plan-btn {
+    display: inline-block;
+    margin-bottom: 0.65rem;
+}
+
+#right-card-pdf {
+    margin-top: 0.35rem;
+}
+
+#left-card-list {
+    margin: 0;
+    padding-left: 1.2rem;
+    line-height: 1.45;
+}
+
+#left-card-list li {
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 640px) {
+    .adm-tab {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,1024 @@
+/* ============================================
+   INICIO-ESTILOS: ESTILOS ESPECÍFICOS DEL INICIO
+   ============================================ */
+
+/* Responsive: este archivo adapta secciones con múltiples @media (768px, 700px, 600px, 480px, etc.) */
+
+/* HERO SECTION */
+.hero { 
+    background: linear-gradient(180deg, rgba(7,38,74,0.06), rgba(7,38,74,0.02)); 
+    padding: 28px; 
+    border-radius: var(--radius); 
+    margin-bottom: 18px 
+}
+
+.hero h1 { 
+    font-size: 2.2rem; 
+    color: var(--brand) 
+}
+
+.hero p { 
+    color: var(--muted) 
+}
+
+/* Responsive: ajustes del hero para tablet/móvil */
+@media (max-width: 768px) {
+    .hero {
+        padding: 20px;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 16px;
+        margin-bottom: 16px;
+    }
+
+    .hero h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+}
+
+.btn { 
+    display: inline-block; 
+    background: var(--brand); 
+    color: #fff; 
+    font-family: inherit;
+    padding: 10px 14px; 
+    border-radius: 8px; 
+    text-decoration: none; 
+    font-weight: 700 
+}
+
+.btn--ghost { 
+    background: transparent; 
+    color: var(--brand); 
+    border: 1px solid rgba(7,38,74,0.08) 
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        display: block;
+        text-align: center;
+    }
+}
+
+/* MEDIA BLOCK (Hero content layout) */
+.media-block {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+} 
+
+.media-block__img {
+    flex: 0 0 48%;
+    max-width: 48%;
+    display: block;
+}
+
+.media-block__img iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    display: block;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgba(7,38,74,0.08);
+}
+
+.media-block__content {
+    flex: 1 1 52%;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.media-block--reverse {
+    flex-direction: row-reverse;
+}
+
+/* Responsive: cambio de layout horizontal a vertical en .media-block */
+@media (max-width: 700px) {
+    .media-block {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .media-block__img {
+        max-width: 100%;
+        flex: none;
+    }
+    
+    .media-block--reverse {
+        flex-direction: column; 
+    }
+}
+
+@media (max-width: 480px) {
+    .media-block {
+        gap: 8px;
+    }
+
+    .media-block__img iframe {
+        min-height: 250px;
+    }
+
+    .media-block__content {
+        padding: 8px 4px;
+    }
+
+    .media-block__content h1 {
+        font-size: 1.6rem;
+    }
+
+    .media-block__content h3 {
+        font-size: 0.95rem;
+    }
+}
+
+/* SECTION DIVIDER */
+.section-divider { 
+    display: flex; 
+    align-items: center; 
+    text-align: center; 
+    margin: 40px 0 
+}
+
+.section-divider::before, 
+.section-divider::after { 
+    content:""; 
+    flex: 1 1 auto; 
+    height: 1px; 
+    background: linear-gradient(to right, rgba(7,38,74,0.06), rgba(7,38,74,0.02)) 
+}
+
+.section-divider span { 
+    display: inline-block; 
+    padding: 0 14px; 
+    background: var(--bg); 
+    font-weight: 700; 
+    color: var(--muted) 
+}
+
+.section-divider--dark {
+    color: #fff;
+}
+
+.section-divider--dark::before,
+.section-divider--dark::after {
+    background: rgba(255,255,255,0.25);
+}
+
+.section-divider--dark span {
+    background: transparent;
+}
+
+@media (max-width: 480px) {
+    .section-divider {
+        margin: 24px 0;
+    }
+    
+    .section-divider span {
+        padding: 0 8px;
+        font-size: 0.95rem;
+    }
+}
+
+/* ============================================
+   CARRUSEL / CAROUSEL
+   ============================================ */
+
+.carousel-section {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f7f9fb 0%, #ffffff 100%);
+    margin: 20px 0;
+}
+
+.carousel-container {
+    position: relative;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    border-radius: var(--radius);
+}
+
+.carousel-item {
+    display: none;
+    min-width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.carousel-item.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.carousel-card {
+    background: var(--surface);
+    padding: 40px 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    max-width: 500px;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.carousel-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.carousel-card h3 {
+    color: var(--brand);
+    font-size: 1.5rem;
+    margin: 15px 0;
+    font-weight: 600;
+}
+
+.carousel-card p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Botones del carrusel */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--brand);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: var(--accent);
+    color: var(--brand);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn-prev {
+    left: 0;
+}
+
+.carousel-btn-next {
+    right: 0;
+}
+
+/* Indicadores */
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #d1d5db;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.indicator.active {
+    background: var(--brand);
+    transform: scale(1.2);
+}
+
+.indicator:hover {
+    background: var(--accent);
+}
+
+.model-image-trigger {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.model-image-trigger:focus-visible {
+    outline: 3px solid rgba(7,38,74,0.35);
+    outline-offset: 2px;
+}
+
+.model-image-reveal {
+    max-height: 0;
+    overflow: hidden;
+    margin-top: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: max-height 420ms ease, opacity 300ms ease, transform 300ms ease, margin-top 300ms ease;
+}
+
+.model-image-reveal .model-reveal-image {
+    display: block;
+    width: min(980px, 100%);
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(7,38,74,0.14);
+    padding: 12px;
+}
+
+.educational-model-section.is-revealed .model-image-reveal {
+    max-height: 900px;
+    margin-top: 14px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .educational-model-section:hover .model-image-reveal {
+        max-height: 900px;
+        margin-top: 14px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   ADMISIONES BACHILLERATO
+   ============================================ */
+
+.admisiones-intro {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: 0 4px 16px rgba(7,38,74,0.08);
+    margin-bottom: 20px;
+}
+
+.bach-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.bach-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 22px;
+    border: 1px solid rgba(7,38,74,0.08);
+    box-shadow: 0 4px 16px rgba(7,38,74,0.06);
+}
+
+.bach-card h2 {
+    margin: 0 0 12px;
+    color: var(--brand);
+    font-size: 1.4rem;
+}
+
+.bach-card h3 {
+    margin: 12px 0 8px;
+    color: var(--brand);
+    font-size: 1.1rem;
+}
+
+.bach-card ul {
+    margin: 0 0 12px 18px;
+    padding: 0;
+}
+
+.bach-card li {
+    margin-bottom: 6px;
+    color: #14213d;
+}
+
+.bach-option {
+    border: 0;
+    background: transparent;
+    padding: 2px 0;
+    font: inherit;
+    color: #14213d;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color 180ms ease, border-color 180ms ease;
+}
+
+.bach-option:hover,
+.bach-option:focus {
+    color: var(--brand);
+    border-bottom-color: rgba(7,38,74,0.35);
+    outline: none;
+}
+
+.bach-option.is-active {
+    color: var(--brand);
+    font-weight: 700;
+    border-bottom-color: var(--brand);
+}
+
+.bach-meta {
+    margin: 14px 0 10px;
+    font-weight: 700;
+    color: var(--brand);
+    text-transform: uppercase;
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+}
+
+.bach-prices {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bach-prices span {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(7,38,74,0.1);
+    color: #14213d;
+    font-weight: 600;
+}
+
+.bach-prices strong {
+    color: var(--brand);
+}
+
+.bach-programa + .bach-programa {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(7,38,74,0.22);
+}
+
+.bach-colab {
+    margin: 14px 0 6px;
+    font-weight: 600;
+    color: #14213d;
+}
+
+.bach-info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: flex-start;
+}
+
+.bach-detail-list p {
+    margin: 0;
+    color: #14213d;
+    font-size: 1.03rem;
+}
+
+.bach-detail-list p + p {
+    margin-top: 8px;
+}
+
+.bach-back-btn {
+    width: fit-content;
+}
+
+#bach-info-pdf,
+#bach-info-reset {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bach-back-btn:hover,
+.bach-back-btn:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.bach-profile-details {
+    margin-top: 10px;
+    border: 1px solid rgba(7,38,74,0.14);
+    border-radius: 10px;
+    background: rgba(7,38,74,0.03);
+    padding: 10px 12px;
+}
+
+.bach-profile-details summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--brand);
+    list-style: none;
+}
+
+.bach-profile-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.bach-profile-details summary::after {
+    content: ' +';
+    font-weight: 800;
+}
+
+.bach-profile-details[open] summary::after {
+    content: ' -';
+}
+
+.bach-profile-text {
+    margin: 10px 0 12px;
+    color: #14213d;
+    line-height: 1.5;
+}
+
+.bach-plan-btn {
+    display: inline-block;
+}
+
+@media (min-width: 901px) {
+    .bach-info-panel {
+        min-height: 430px;
+    }
+
+    .bach-panel-detail h2 {
+        font-size: 2rem;
+        margin-bottom: 14px;
+    }
+
+    .bach-detail-list p {
+        font-size: 1.22rem;
+        line-height: 1.5;
+    }
+
+    .bach-info-panel .btn,
+    .bach-back-btn {
+        display: block;
+        width: 100%;
+        max-width: 420px;
+        text-align: center;
+        font-size: 1.12rem;
+        padding: 12px 16px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 900px) {
+    .bach-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .admisiones-intro,
+    .bach-card {
+        padding: 16px;
+    }
+
+    .bach-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .bach-panel-detail h2 {
+        font-size: 2rem;
+        margin-bottom: 14px;
+    }
+
+    .bach-detail-list p {
+        font-size: 1.24rem;
+        line-height: 1.5;
+    }
+
+    .bach-detail-list p + p {
+        margin-top: 10px;
+    }
+
+    .bach-info-panel .btn,
+    .bach-back-btn {
+        width: 100%;
+        display: block;
+        text-align: center;
+        padding: 12px 16px;
+        font-size: 1.24rem;
+        border-radius: 10px;
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bach-prices span {
+        max-width: 100%;
+        font-size: 0.92rem;
+    }
+}
+
+/* Responsive del carrusel */
+@media (max-width: 768px) {
+    .carousel-container {
+        padding: 0 40px;
+    }
+
+    .carousel-card {
+        padding: 30px 20px;
+    }
+
+    .carousel-icon {
+        font-size: 2.5rem;
+    }
+
+    .carousel-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .carousel-card p {
+        font-size: 0.9rem;
+    }
+
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-section {
+        padding: 24px 15px;
+        margin: 16px 0;
+    }
+
+    .carousel-container {
+        padding: 0 30px;
+    }
+
+    .carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .carousel-card {
+        padding: 20px 12px;
+    }
+
+    .carousel-icon {
+        font-size: 2rem;
+    }
+
+    .carousel-card h3 {
+        font-size: 1.1rem;
+        margin: 10px 0;
+    }
+
+    .carousel-card p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .carousel-indicators {
+        gap: 8px;
+        margin-top: 16px;
+    }
+
+    .indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Respetar preferencia de movimiento del usuario */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* MISIÓN Y VISIÓN - TARJETAS DESPLEGABLES */
+.mission-vision-section {
+    max-width: var(--container);
+    margin: 48px auto;
+    padding: 0 20px;
+}
+
+.mission-vision-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+}
+
+.mission-vision-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 16px rgba(7, 38, 74, 0.1);
+    transition: box-shadow 300ms ease;
+}
+
+.mission-vision-card:hover {
+    box-shadow: 0 8px 24px rgba(7, 38, 74, 0.2);
+}
+
+.mission-vision-card .card-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+    transition: transform 400ms ease;
+}
+
+.mission-vision-card:hover .card-image {
+    transform: scale(1.05);
+}
+
+.card-text {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(7, 38, 74, 0.95) 0%, rgba(55, 47, 119, 0.95) 100%);
+    color: white;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: width 400ms ease, opacity 400ms ease;
+}
+
+.mission-vision-card:hover .card-text {
+    width: 100%;
+    opacity: 1;
+}
+
+.card-text h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffd166;
+}
+
+.card-text p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #f1f5f9;
+}
+
+@media (max-width: 900px) {
+    .mission-vision-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .mission-vision-section {
+        margin: 32px auto;
+        padding: 0 15px;
+    }
+
+    .mission-vision-card .card-image {
+        height: 220px;
+    }
+    
+    .card-text {
+        padding: 16px;
+    }
+    
+    .card-text h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .card-text p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+}
+
+/* MODELO EDUCATIVO - TARJETA GRANDE */
+.educational-model-section {
+    max-width: var(--container);
+    margin: 48px auto;
+    padding: 0 20px;
+}
+
+.educational-model-card {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 16px rgba(7, 38, 74, 0.1);
+    transition: box-shadow 300ms ease;
+    height: 400px;
+}
+
+.educational-model-card:hover {
+    box-shadow: 0 8px 24px rgba(7, 38, 74, 0.2);
+}
+
+.educational-model-card .model-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 400ms ease;
+    flex-shrink: 0;
+}
+
+.educational-model-card:hover .model-image {
+    transform: scale(1.05);
+}
+
+.model-text {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 0;
+    width: 100%;
+    background: linear-gradient(135deg, rgba(7, 38, 74, 0.95) 0%, rgba(55, 47, 119, 0.95) 100%);
+    color: white;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 400ms ease, opacity 400ms ease;
+    cursor: pointer;
+}
+
+.educational-model-card:hover .model-text {
+    height: 100%;
+    opacity: 1;
+}
+
+.model-text h3 {
+    margin: 0 0 16px 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffd166;
+}
+
+.model-text p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #f1f5f9;
+}
+
+/* Imagen SVG del Modelo Educativo (debajo de la tarjeta) */
+.educational-model-svg {
+    max-width: 1100px;
+    width: 100%;
+    display: block;
+    margin: 18px auto 0;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-12px);
+    transform-origin: top;
+    transition: max-height 420ms ease, opacity 320ms ease, transform 320ms ease;
+    object-fit: contain;
+}
+
+.educational-model-card:hover + .educational-model-svg {
+    max-height: 1200px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+    .educational-model-card {
+        height: 350px;
+    }
+    
+    .model-text {
+        padding: 24px;
+    }
+    
+    .model-text h3 {
+        font-size: 1.4rem;
+    }
+    
+    .model-text p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .educational-model-section {
+        margin: 32px auto;
+        padding: 0 15px;
+    }
+
+    .educational-model-card {
+        display: block;
+        height: auto;
+        overflow: visible;
+    }
+
+    .educational-model-card .model-image {
+        height: 220px;
+    }
+    
+    .model-text {
+        position: static;
+        height: auto;
+        max-height: 0;
+        opacity: 0;
+        padding: 0 16px;
+        overflow: hidden;
+        transform: translateY(-10px);
+        transition: max-height 380ms ease, opacity 280ms ease, transform 280ms ease, padding 280ms ease;
+        cursor: default;
+    }
+
+    .educational-model-section.is-revealed .model-text {
+        max-height: 520px;
+        opacity: 1;
+        padding: 16px;
+        transform: translateY(0);
+    }
+    
+    .model-text h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .model-text p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    .educational-model-svg {
+        max-height: 300px;
+    }
+}
+
+/* Respetar preferencia de movimiento del usuario */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

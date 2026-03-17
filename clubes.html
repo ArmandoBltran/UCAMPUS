@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <!-- Responsive: permite que el layout se adapte al ancho real del dispositivo -->
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <meta name="description" content="Clubes Universidad Carolina - UCAMPUS. Deportivos y Culturales.">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/estiloscomunes.css">
+        <link rel="stylesheet" href="css/clubes-estilos.css">
+        <title>Clubes | UCAMPUS</title>
+    </head>
+    <body>
+        <script src="js/common-nav.js"></script>
+        <!-- Sidebar izquierdo -->
+        <aside class="sidebar sidebar-left">
+            <ul class="important-links">
+                <li><a href="https://ucarolina.edu.mx/" target="_blank" rel="non" aria-label="Google"><img src="https://img.icons8.com/material-outlined/96/000000/google-logo.png" alt="Google"></a></li>
+                <li><a href="https://www.linkedin.com/company/universidad-carolina/" target="_blank" rel="non" aria-label="LinkedIn"><img src="https://img.icons8.com/material-outlined/96/000000/linkedin.png" alt="LinkedIn"></a></li>
+                <li><a href="https://x.com/UCarolinaMx" target="_blank" rel="non" aria-label="Twitter"><img src="https://img.icons8.com/material-outlined/96/000000/twitter.png" alt="Twitter"></a></li>
+                <li><a href="https://www.instagram.com/universidadcarolina?igsh=MW00M20zb3Z4aGFicw==" target="_blank" rel="non" aria-label="Instagram"><img src="https://img.icons8.com/material-outlined/96/000000/instagram.png" alt="Instagram"></a></li>
+                <li><a href="https://web.facebook.com/UniversidadCarolina/?_rdc=1&_rdr#" target="_blank" rel="non" aria-label="Facebook"><img src="https://img.icons8.com/material-outlined/96/000000/facebook.png" alt="Facebook"></a></li>
+            </ul>
+        </aside>
+        <header>
+            <div class="header-inner">
+                <a href="inicio.html" class="logo">
+                    <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" width="80" height="80" alt="Logo Universidad Carolina">
+                    <h2 class="Nombre">UCAMPUS</h2>
+                </a>
+                <!-- Responsive: botón que aparece/funciona como menú móvil en pantallas pequeñas -->
+                <button class="hamburger-menu" id="hamburger" aria-label="Menú" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Responsive: menú alterno para navegación móvil -->
+                <nav id="nav-menu" class="nav-closed nav-desktop">
+                    <ul class="nav-menu">
+                        <li><a href="inicio.html" class="nav-link">Inicio</a></li>
+                        <li><a href="admisiones.html" class="nav-link">Admisiones</a></li>
+                        <li class="nav-item-dropdown">
+                            <a href="clubes.html" class="nav-link">Clubes</a>
+                            <ul class="nav-submenu">
+                                <li><a href="clubes-deportivos.html">Deportivos</a></li>
+                                <li><a href="clubes-culturales.html">Culturales</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="tramites.html" class="nav-link">Trámites</a></li>
+                        <li><a href="https://i-escolar.com/muralweb/login/" class="nav-link" target="_blank" rel="noopener">Innovat</a></li>
+                    </ul>
+                </nav>
+                <!-- Menú móvil tipo navegador con flechas -->
+                <div id="nav-mobile" class="nav-mobile">
+                    <button class="nav-mobile-prev" id="nav-prev" aria-label="Anterior">&#10094;</button>
+                    <div class="nav-mobile-display">
+                        <span class="nav-mobile-item" data-link="inicio.html">Inicio</span>
+                        <span class="nav-mobile-item" data-link="admisiones.html">Admisiones</span>
+                        <span class="nav-mobile-item" data-link="clubes-deportivos.html">Deportivos</span>
+                        <span class="nav-mobile-item" data-link="clubes-culturales.html">Culturales</span>
+                        <span class="nav-mobile-item" data-link="tramites.html">Trámites</span>
+                        <span class="nav-mobile-item" data-link="https://i-escolar.com/muralweb/login/">Innovat</span>
+                    </div>
+                    <button class="nav-mobile-next" id="nav-next" aria-label="Siguiente">&#10095;</button>
+                </div>
+            </div>
+        </header>
+        <main class="clubes-main">
+            <section class="clubes-grid">
+                <!-- Tarjeta de Clubes Deportivos -->
+                <div class="clube-card clube-card-left" data-type="deportivos" data-link="clubes-deportivos.html">
+                    <img src="descubre-como-es-un-juego-de-futbol-americano-jpg.webp" alt="Clubes Deportivos" class="clube-image">
+                    <div class="clube-overlay">
+                        <div class="clube-content">
+                            <div class="clube-label">Deportivos</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tarjeta de Clubes Culturales -->
+                <div class="clube-card clube-card-right" data-type="culturales" data-link="clubes-culturales.html">
+                    <img src="701480bdb14c-grupo-bailando-t.webp" alt="Clubes Culturales" class="clube-image">
+                    <div class="clube-overlay">
+                        <div class="clube-content">
+                            <div class="clube-label">Culturales</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer" role="contentinfo">
+            <div class="container">
+                <div class="footer-col">
+                    <div class="brand">
+                        <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" alt="Logo Universidad Carolina">
+                        <div>
+                            <h3>Universidad Carolina</h3>
+                            <p>En todo, Amar y Servir — Formación académica con vocación social.</p>
+                        </div>
+                    </div>
+                    <p class="contact">
+                        <small>Campus Principal</small>
+                        Calz. Antonio Narro N°707<br>
+                        Saltillo, Coahuila • C.P. 25000<br>
+                        <a href="tel:+5218444141435">(+52) 844 414 1435</a><br>
+                        <a href="mailto:contacto@ucampus.edu.mx">contacto@ucarolina.edu.mx</a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces rápidos</h3>
+                    <ul>
+                        <li><a href="inicio.html">Inicio</a></li>
+                        <li><a href="admisiones.html">Admisiones</a></li>
+                        <li><a href="clubes.html">Clubes</a></li>
+                        <li><a href="tramites.html">Trámites</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <small>© <span id="year">2025</span> Universidad Carolina. Todos los derechos reservados. <a href="#">Aviso de privacidad</a> • <a href="#">Términos</a></small>
+                </div>
+            </div>
+        </footer>
+    </body>
+    <script src="js/clubes.js"></script>
+</html>
+
+
