@@ -1,3 +1,105 @@
+.inscripcion-flow {
+    margin-top: 28px;
+    margin-bottom: 22px;
+}
+
+.inscripcion-flow h2 {
+    margin: 0 0 10px;
+    color: #1f2c3b;
+}
+
+.inscripcion-flow-lead {
+    margin: 0 0 20px;
+    color: #384655;
+}
+
+.inscripcion-flow-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+}
+
+.flow-card {
+    background: #fbfcfd;
+    border: 1px solid #d7dfe6;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 3px 12px rgba(22, 34, 45, 0.05);
+}
+
+.flow-card h3 {
+    margin: 0 0 10px;
+    color: #1f2f40;
+}
+
+.flow-step1-note {
+    margin: 0 0 12px;
+    color: #3a4d60;
+}
+
+.flow-list {
+    margin: 0;
+    padding-left: 22px;
+    color: #263544;
+    line-height: 1.45;
+}
+
+.flow-list li + li {
+    margin-top: 6px;
+}
+
+.admisiones-mail {
+    color: #1f4f73;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    padding: 1px 3px;
+    border-radius: 4px;
+    transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.admisiones-mail:hover,
+.admisiones-mail:focus-visible {
+    color: #0f2a40;
+    background-color: #d9ebf8;
+    box-shadow: 0 0 0 2px rgba(94, 149, 191, 0.28);
+}
+
+.flow-level-tabs {
+    margin-top: 14px;
+    display: grid;
+    gap: 8px;
+}
+
+.flow-level-tab {
+    text-align: left;
+    width: 100%;
+    border: 2px solid #bcc9d4;
+    border-radius: 8px;
+    background: #f5f8fb;
+    color: #213142;
+    font: inherit;
+    font-weight: 700;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: transform 130ms ease, background 150ms ease, border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.flow-level-tab:hover {
+    border-color: #95adc0;
+    background: #ebf2f8;
+    transform: translateY(-1px);
+}
+
+.flow-level-tab.is-active {
+    border-color: #3e6d8e;
+    background: #dbe9f5;
+    color: #0f2234;
+    box-shadow: 0 0 0 3px rgba(62, 109, 142, 0.18);
+}
+
 .agenda-section {
     margin-top: 26px;
     margin-bottom: 32px;
@@ -141,6 +243,10 @@
 }
 
 @media (max-width: 820px) {
+    .inscripcion-flow-grid {
+        grid-template-columns: 1fr;
+    }
+
     .appointment-grid {
         grid-template-columns: 1fr;
     }

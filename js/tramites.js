@@ -1,4 +1,64 @@
 (function () {
+    const flowTabs = Array.from(document.querySelectorAll('.flow-level-tab'));
+    const flowStep1List = document.getElementById('flow-step1-list');
+    const flowStep1Note = document.getElementById('flow-step1-note');
+
+    if (flowTabs.length && flowStep1List) {
+        const requirementsByLevel = {
+            preparatoria: {
+                label: 'Preparatoria',
+                items: [
+                    'Certificado de secundaria o constancia de terminación.',
+                    'Acta de nacimiento vigente.',
+                    'CURP y copia de identificación del tutor.',
+                    'Comprobante de domicilio reciente y 4 fotografías tamaño infantil.'
+                ]
+            },
+            profesional: {
+                label: 'Profesional',
+                items: [
+                    'Acta de nacimiento.',
+                    'Comprobante de domicilio.',
+                    'CURP.',
+                    'Certificado de bachillerato.',
+                    'Carta de autenticidad del certificado.'
+                ]
+            },
+            maestria: {
+                label: 'Maestría',
+                items: [
+                    'Acta de nacimiento.',
+                    'Comprobante de domicilio.',
+                    'CURP.',
+                    'Copia de título profesional.',
+                    'Entrevista de admisión.',
+                    'Correo de contacto: admisiones@ucarolina.mx'
+                ]
+            }
+        };
+
+        function renderRequirements(level) {
+            const current = requirementsByLevel[level] || requirementsByLevel.preparatoria;
+            flowStep1List.innerHTML = current.items.map((item) => `<li>${item}</li>`).join('');
+            if (flowStep1Note) {
+                flowStep1Note.innerHTML = `<strong>Nivel seleccionado:</strong> ${current.label}`;
+            }
+        }
+
+        flowTabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                flowTabs.forEach((item) => {
+                    item.classList.remove('is-active');
+                    item.setAttribute('aria-selected', 'false');
+                });
+
+                tab.classList.add('is-active');
+                tab.setAttribute('aria-selected', 'true');
+                renderRequirements(tab.dataset.flowLevel || 'preparatoria');
+            });
+        });
+    }
+
     const form = document.getElementById('appointment-form');
     if (!form) {
         return;

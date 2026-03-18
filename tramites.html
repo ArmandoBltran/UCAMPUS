@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/estiloscomunes.css?v=20260317">
         <link rel="stylesheet" href="css/inicio-estilos.css?v=20260317">
-        <link rel="stylesheet" href="css/tramites-estilos.css?v=20260317">
+        <link rel="stylesheet" href="css/tramites-estilos.css?v=20260320">
         <title>Trámites | UCAMPUS</title>
     </head>
     <body>
@@ -71,6 +71,48 @@
                 <h1>Trámites en Universidad Carolina</h1>
                 <p>En la Universidad Carolina, nos comprometemos a facilitar tus trámites académicos y administrativos para que puedas enfocarte en tu formación y desarrollo. Desde inscripciones hasta solicitudes de becas, nuestro sistema de trámites está diseñado para ser eficiente, transparente y accesible.</p>
                 <p>Explora nuestra sección de trámites para conocer los requisitos, procedimientos y plazos para cada tipo de trámite. Nuestro equipo de atención al estudiante está siempre disponible para ayudarte en cada paso del proceso. ¡Tu éxito es nuestra prioridad!</p>
+            </section>
+
+            <section class="inscripcion-flow" aria-labelledby="inscripcion-flow-title">
+                <h2 id="inscripcion-flow-title">Proceso de inscripción</h2>
+                <p class="inscripcion-flow-lead">Bienvenido al área de admisiones de Universidad Carolina. Sigue estos sencillos pasos para realizar tu inscripción.</p>
+
+                <div class="inscripcion-flow-grid">
+                    <article class="flow-card flow-card-step1" aria-labelledby="flow-step1-title">
+                        <h3 id="flow-step1-title">Paso 1. Reúne los requisitos</h3>
+                        <p id="flow-step1-note" class="flow-step1-note"><strong>Nivel seleccionado:</strong> Preparatoria</p>
+                        <ul id="flow-step1-list" class="flow-list">
+                            <li>Preparatoria terminada (certificado o constancia oficial).</li>
+                            <li>Acta de nacimiento vigente.</li>
+                            <li>CURP y copia de identificación oficial.</li>
+                            <li>Comprobante de domicilio reciente.</li>
+                        </ul>
+
+                        <div class="flow-level-tabs" role="tablist" aria-label="Nivel académico para requisitos">
+                            <button type="button" class="flow-level-tab is-active" data-flow-level="preparatoria" role="tab" aria-selected="true">Preparatoria</button>
+                            <button type="button" class="flow-level-tab" data-flow-level="profesional" role="tab" aria-selected="false">Profesional</button>
+                            <button type="button" class="flow-level-tab" data-flow-level="maestria" role="tab" aria-selected="false">Maestría</button>
+                        </div>
+                    </article>
+
+                    <article class="flow-card" aria-labelledby="flow-step2-title">
+                        <h3 id="flow-step2-title">Paso 2. Registro</h3>
+                        <ul class="flow-list">
+                            <li>Acude al área de admisiones en las instalaciones de la Universidad Carolina.</li>
+                            <li>Realiza el registro de tus datos para obtener tu matrícula.</li>
+                            <li>No es necesario presentar todos los documentos al momento del registro; la fecha límite de entrega se asigna según tu nivel académico.</li>
+                        </ul>
+                    </article>
+
+                    <article class="flow-card" aria-labelledby="flow-step3-title">
+                        <h3 id="flow-step3-title">Paso 3. Pago de inscripción</h3>
+                        <ul class="flow-list">
+                            <li>Con tu número de matrícula acude a caja para realizar tu pago.</li>
+                            <li>Debes cubrir este pago en su totalidad para formalizar tu inscripción. Puedes pagar en efectivo o con tarjetas de crédito o débito.</li>
+                            <li>La cuota de inscripción varía de acuerdo al programa académico. Para consultar costos, escribe a <a class="admisiones-mail" href="mailto:admisiones@ucarolina.mx">admisiones@ucarolina.mx</a>.</li>
+                        </ul>
+                    </article>
+                </div>
             </section>
 
             <section class="agenda-section" aria-labelledby="agenda-title">
@@ -155,7 +197,7 @@
                 </div>
             </div>
         </footer>
-        <script src="js/tramites.js?v=20260317"></script>
+        <script src="js/tramites.js?v=20260319"></script>
     </body>
 </html>
 
