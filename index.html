@@ -7,12 +7,12 @@
         <meta name="description" content="Universidad Carolina - UCAMPUS. Formación académica con vocación social.">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/estiloscomunes.css">
-        <link rel="stylesheet" href="css/inicio-estilos.css">
+        <link rel="stylesheet" href="css/estiloscomunes.css?v=20260317">
+        <link rel="stylesheet" href="css/inicio-estilos.css?v=20260318">
         <title>UCAMPUS</title>
     </head>
-        <script src="js/common-nav.js"></script>
-        <script src="js/inicio.js"></script>
+        <script src="js/common-nav.js?v=20260317"></script>
+        <script src="js/inicio.js?v=20260318"></script>
     <body>
         <!-- Sidebar izquierdo -->
         <aside class="sidebar sidebar-left">
@@ -71,12 +71,9 @@
         </header>
                 <main>
                         <section class="hero">
-                                <div class="media-block">
-              <div class="media-block__img">
-                <iframe title="Ubicación Universidad Carolina en Google Maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6865.948479663798!2d-101.00896931628314!3d25.416525676359505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868872949bba09ff%3A0x1e535baa3cf0c8e6!2sUniversidad%20Carolina!5e0!3m2!1ses!2smx!4v1769657406399!5m2!1ses!2smx" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> 
-              </div>
-             <div class="media-block__content">
-                <h1>En todo Amar y Servir</h1>
+                                                                <div class="media-block">
+                         <div class="media-block__content">
+                <h1 class="hero-motto">In Omnibus Amare At Servire</h1>
                 <h3>"La Universidad Carolina se funda con absoluta vocación de transformar este mundo. Sabemos que nuestros dragones, a través del desarrollo de sus pasiones y talentos, van a poder contribuir a donde quiera que estén para hacer de este un mejor lugar para todos."</h3>
              </div>
                      </div>
@@ -86,7 +83,7 @@
             </div>
             <!-- Carrusel de información -->
             <section class="carousel-section">
-                <div class="carousel-container">
+                <div class="carousel-container" data-carousel="info">
                     <div class="carousel">
                         <div class="carousel-item active">
                             <div class="carousel-card">
@@ -130,6 +127,47 @@
                 </div>
                 <img src="https://ucarolina.edu.mx/assets/educational_model/modelo_educativo-96cfc02984f46cd451d781a1933e2de3aa80963c2f277354d09000e55af4698d.svg" alt="Modelo Educativo - Esquema" class="educational-model-svg">
             </section>
+
+            <section class="campus-gallery-section" aria-label="Galería del campus">
+                <h2 class="campus-gallery-title">Campus Universidad Carolina</h2>
+                <div class="carousel-container" data-carousel="campus">
+                    <div class="carousel">
+                        <div class="carousel-item active">
+                            <figure class="campus-slide">
+                                <img src="https://vanguardia.com.mx/binrepository/2048x1366/0c0/0d0/down-right/11604/RHWB/img_0091_0_VG3571252_MG565271.jpg" alt="Vista frontal del campus Universidad Carolina">
+                                <figcaption>Instalaciones principales y acceso al campus.</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-item">
+                            <figure class="campus-slide">
+                                <img src="https://ucarolina.edu.mx/assets/we/inicios-36f2ada529da9aab7e48d4a2a0442fc22868e330b0a23a88a9a32eb6d831e0b9.jpg" alt="Espacios de convivencia universitaria en el campus">
+                                <figcaption>Espacios donde se integran vida académica y comunidad.</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-item">
+                            <figure class="campus-slide">
+                                <img src="https://ucarolina.edu.mx/assets/we/vision-0caf8d7e291323fbe2104345dc499d1b7f60e8e8ccd12d174bd995139ade0fef.jpg" alt="Áreas formativas del campus Universidad Carolina">
+                                <figcaption>Ambientes diseñados para aprendizaje activo y colaboración.</figcaption>
+                            </figure>
+                        </div>
+                        <div class="carousel-item">
+                            <figure class="campus-slide">
+                                <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80" alt="Vida estudiantil en entorno universitario">
+                                <figcaption>Experiencia universitaria con enfoque humano y profesional.</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">&#10094;</button>
+                    <button class="carousel-btn carousel-btn-next" aria-label="Siguiente">&#10095;</button>
+                    <div class="carousel-indicators">
+                        <button class="indicator active" aria-label="Ir a imagen 1"></button>
+                        <button class="indicator" aria-label="Ir a imagen 2"></button>
+                        <button class="indicator" aria-label="Ir a imagen 3"></button>
+                        <button class="indicator" aria-label="Ir a imagen 4"></button>
+                    </div>
+                </div>
+            </section>
+
             <!-- Sección de Misión y Visión -->
             <section class="mission-vision-section">
                 <div class="mission-vision-container">
@@ -170,12 +208,15 @@ Crear en nuestra comunidad los conocimientos y las capacidades humanas que permi
         </main>
         <footer class="site-footer" role="contentinfo">
             <div class="container">
+                <div class="footer-col footer-map-col">
+                    <iframe title="Ubicacion Universidad Carolina en Google Maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6865.948479663798!2d-101.00896931628314!3d25.416525676359505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x868872949bba09ff%3A0x1e535baa3cf0c8e6!2sUniversidad%20Carolina!5e0!3m2!1ses!2smx!4v1769657406399!5m2!1ses!2smx" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
                 <div class="footer-col">
                     <div class="brand">
                         <img src="LogoUcarolina_Horizontal-1573ae7493b1cb1aec998e17fcc39a86513fbcbc11721f3de8533b89a77758d7.png" alt="Logo Universidad Carolina">
-                        <div>
+                        <div class="footer-brand-copy">
                             <h3>Universidad Carolina</h3>
-                            <p>En todo, Amar y Servir — Formación académica con vocación social.</p>
+                            <p class="brand-motto">In Omnibus Amare At Servire — Formación académica con vocación social.</p>
                         </div>
                     </div>
                     <p class="contact">

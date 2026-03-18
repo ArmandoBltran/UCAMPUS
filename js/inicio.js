@@ -1,77 +1,111 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let currentSlide = 0;
-    const items = Array.from(document.querySelectorAll('.carousel-item'));
-    const indicators = Array.from(document.querySelectorAll('.indicator'));
-    const nextBtn = document.querySelector('.carousel-btn-next');
-    const prevBtn = document.querySelector('.carousel-btn-prev');
-    const carousel = document.querySelector('.carousel-container');
+    const cleanupFns = [];
 
-    let slideInterval = null;
-    const startInterval = () => {
-        stopInterval();
-        slideInterval = setInterval(() => showSlide(currentSlide + 1), 5000);
-    };
-    const stopInterval = () => {
-        if (slideInterval) {
-            clearInterval(slideInterval);
-            slideInterval = null;
+    function setupCarousel(carouselRoot) {
+        if (!carouselRoot) {
+            return null;
         }
-    };
-    const resetInterval = () => {
-        stopInterval();
+
+        let currentSlide = 0;
+        const items = Array.from(carouselRoot.querySelectorAll('.carousel-item'));
+        const indicators = Array.from(carouselRoot.querySelectorAll('.indicator'));
+        const nextBtn = carouselRoot.querySelector('.carousel-btn-next');
+        const prevBtn = carouselRoot.querySelector('.carousel-btn-prev');
+
+        if (!items.length || !indicators.length) {
+            return null;
+        }
+
+        let slideInterval = null;
+
+        function showSlide(index) {
+            currentSlide = (index + items.length) % items.length;
+
+            items.forEach((item, i) => {
+                const active = i === currentSlide;
+                item.classList.toggle('active', active);
+                item.setAttribute('aria-hidden', String(!active));
+            });
+
+            indicators.forEach((indicator, i) => {
+                const active = i === currentSlide;
+                indicator.classList.toggle('active', active);
+                indicator.setAttribute('aria-current', active ? 'true' : 'false');
+            });
+        }
+
+        function stopInterval() {
+            if (slideInterval) {
+                clearInterval(slideInterval);
+                slideInterval = null;
+            }
+        }
+
+        function startInterval() {
+            stopInterval();
+            slideInterval = setInterval(() => showSlide(currentSlide + 1), 5000);
+        }
+
+        function resetInterval() {
+            stopInterval();
+            startInterval();
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+                resetInterval();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+                resetInterval();
+            });
+        }
+
+        indicators.forEach((indicator, index) => {
+            indicator.setAttribute('role', 'tab');
+            indicator.setAttribute('tabindex', '0');
+            indicator.addEventListener('click', () => {
+                showSlide(index);
+                resetInterval();
+            });
+            indicator.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    showSlide(index);
+                    resetInterval();
+                }
+            });
+        });
+
+        carouselRoot.addEventListener('mouseenter', stopInterval);
+        carouselRoot.addEventListener('mouseleave', startInterval);
+        carouselRoot.addEventListener('focusin', stopInterval);
+        carouselRoot.addEventListener('focusout', startInterval);
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopInterval();
+            } else {
+                startInterval();
+            }
+        });
+
+        showSlide(0);
         startInterval();
-    };
-
-    function showSlide(n) {
-        if (!items.length || !indicators.length) return;
-        currentSlide = (n + items.length) % items.length;
-
-        items.forEach((item, i) => {
-            const active = i === currentSlide;
-            item.classList.toggle('active', active);
-            item.setAttribute('aria-hidden', (!active).toString());
-        });
-
-        indicators.forEach((indicator, i) => {
-            const active = i === currentSlide;
-            indicator.classList.toggle('active', active);
-            indicator.setAttribute('aria-current', active ? 'true' : 'false');
-        });
+        return stopInterval;
     }
 
-    // Controles
-    if (nextBtn) nextBtn.addEventListener('click', () => { showSlide(currentSlide + 1); resetInterval(); });
-    if (prevBtn) prevBtn.addEventListener('click', () => { showSlide(currentSlide - 1); resetInterval(); });
-
-    indicators.forEach((indicator, index) => {
-        indicator.setAttribute('role', 'tab');
-        indicator.setAttribute('tabindex', '0');
-        indicator.addEventListener('click', () => { showSlide(index); resetInterval(); });
-        indicator.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showSlide(index); resetInterval(); }
-        });
+    const carousels = Array.from(document.querySelectorAll('[data-carousel]'));
+    carousels.forEach((carouselRoot) => {
+        const cleanup = setupCarousel(carouselRoot);
+        if (cleanup) {
+            cleanupFns.push(cleanup);
+        }
     });
-
-    // Pausar/resumir autoplay al interactuar o al cambiar visibilidad
-    if (carousel) {
-        carousel.addEventListener('mouseenter', stopInterval);
-        carousel.addEventListener('mouseleave', startInterval);
-        carousel.addEventListener('focusin', stopInterval);
-        carousel.addEventListener('focusout', startInterval);
-    }
-
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) stopInterval(); else startInterval();
-    });
-
-    // Navegación por teclado global
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') { showSlide(currentSlide + 1); resetInterval(); }
-        if (e.key === 'ArrowLeft') { showSlide(currentSlide - 1); resetInterval(); }
-    });
-
-    showSlide(0);
-    startInterval();
 
     const modelSection = document.querySelector('.educational-model-section');
     const modelTrigger = document.getElementById('model-image-trigger');
@@ -96,5 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    window.addEventListener('beforeunload', stopInterval);
+    window.addEventListener('beforeunload', () => {
+        cleanupFns.forEach((cleanup) => cleanup());
+    });
 });

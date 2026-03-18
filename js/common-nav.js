@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let isTicking = false;
 
         siteFooter.classList.add('footer-gated');
+        siteFooter.setAttribute('aria-hidden', 'true');
 
         const updateFooterVisibility = () => {
             const scrollBottom = window.scrollY + window.innerHeight;
@@ -147,7 +148,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         window.addEventListener('scroll', onScrollFooter, { passive: true });
         window.addEventListener('resize', onScrollFooter);
-        updateFooterVisibility();
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(updateFooterVisibility);
+        });
     }
 
     const opcionesBachiller = document.querySelectorAll('.bach-option');
