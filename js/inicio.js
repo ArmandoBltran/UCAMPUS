@@ -130,6 +130,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Manejo de tarjetas de Misión y Visión
+    const missionVisionSection = document.querySelector('.mission-vision-section');
+    const missionTrigger = document.getElementById('mission-card-trigger');
+    const visionTrigger = document.getElementById('vision-card-trigger');
+
+    if (missionTrigger && visionTrigger && missionVisionSection) {
+        const setMissionState = (isOpen) => {
+            missionVisionSection.classList.toggle('is-mission-revealed', isOpen);
+            missionTrigger.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        const setVisionState = (isOpen) => {
+            missionVisionSection.classList.toggle('is-vision-revealed', isOpen);
+            visionTrigger.setAttribute('aria-expanded', String(isOpen));
+        };
+
+        missionTrigger.addEventListener('click', () => {
+            const isOpen = missionVisionSection.classList.contains('is-mission-revealed');
+            setMissionState(!isOpen);
+            // Cerrar visión si está abierta
+            if (visionTrigger.getAttribute('aria-expanded') === 'true') {
+                setVisionState(false);
+            }
+        });
+
+        visionTrigger.addEventListener('click', () => {
+            const isOpen = missionVisionSection.classList.contains('is-vision-revealed');
+            setVisionState(!isOpen);
+            // Cerrar misión si está abierta
+            if (missionTrigger.getAttribute('aria-expanded') === 'true') {
+                setMissionState(false);
+            }
+        });
+
+        missionTrigger.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setMissionState(false);
+            }
+        });
+
+        visionTrigger.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setVisionState(false);
+            }
+        });
+    }
+
     window.addEventListener('beforeunload', () => {
         cleanupFns.forEach((cleanup) => cleanup());
     });

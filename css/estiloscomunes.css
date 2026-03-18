@@ -171,7 +171,7 @@ a:hover{ text-decoration: underline }
     }
 }
 
-/* Responsive móvil: oculta sidebars y reorganiza header/nav para pantallas <= 768px */
+/* Responsive móvil: sidebar compacto con redes sociales desplegables y header/nav ajustado */
 @media (max-width: 768px) {
     .nav-mobile {
         display: flex;
@@ -182,7 +182,78 @@ a:hover{ text-decoration: underline }
     }
 
     .sidebar {
-        display: none;
+        display: flex;
+        top: 94px;
+        width: 52px;
+        max-height: 52px;
+        padding: 6px 0;
+        border-radius: 12px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        overflow: hidden;
+    }
+
+    .sidebar::before {
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 22px;
+        opacity: 0.8;
+    }
+
+    .important-links {
+        gap: 8px;
+        max-height: 0;
+        opacity: 0;
+        margin-top: 28px;
+    }
+
+    .sidebar:hover,
+    .sidebar:active,
+    .sidebar:focus-within {
+        max-height: 320px;
+    }
+
+    .sidebar.is-open {
+        max-height: 320px;
+    }
+
+    .sidebar:hover .important-links,
+    .sidebar:active .important-links,
+    .sidebar:focus-within .important-links {
+        max-height: 260px;
+        opacity: 1;
+    }
+
+    .sidebar.is-open .important-links {
+        max-height: 260px;
+        opacity: 1;
+    }
+
+    .sidebar.is-open::before {
+        opacity: 0;
+    }
+
+    .important-links a {
+        width: 36px;
+        height: 36px;
+    }
+
+    .important-links img {
+        width: 26px;
+        height: 26px;
+    }
+
+    .sidebar-left {
+        left: 6px;
+        padding-left: 0;
+    }
+
+    .sidebar-right {
+        right: 6px;
+        left: auto;
+        padding-right: 0;
     }
 
     header {

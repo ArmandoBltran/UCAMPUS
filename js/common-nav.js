@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navDesktop = document.getElementById('nav-menu');
     const hamburger = document.getElementById('hamburger');
     const navItems = document.querySelectorAll('.nav-item-dropdown > a');
+    const sidebars = document.querySelectorAll('.sidebar');
 
     let currentNavItem = 0;
 
@@ -118,6 +119,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', updateNavDisplay);
     updateNavDisplay();
+
+    if (sidebars.length > 0) {
+        const closeAllSidebars = () => {
+            sidebars.forEach((sidebar) => sidebar.classList.remove('is-open'));
+        };
+
+        sidebars.forEach((sidebar) => {
+            sidebar.setAttribute('tabindex', '0');
+
+            sidebar.addEventListener('click', (event) => {
+                if (window.innerWidth > 768) return;
+
+                const clickedLink = event.target.closest('.important-links a');
+                if (clickedLink) return;
+
+                const shouldOpen = !sidebar.classList.contains('is-open');
+                closeAllSidebars();
+                if (shouldOpen) {
+                    sidebar.classList.add('is-open');
+                }
+            });
+
+            sidebar.addEventListener('keydown', (event) => {
+                if (window.innerWidth > 768) return;
+
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    const shouldOpen = !sidebar.classList.contains('is-open');
+                    closeAllSidebars();
+                    if (shouldOpen) {
+                        sidebar.classList.add('is-open');
+                    }
+                }
+
+                if (event.key === 'Escape') {
+                    sidebar.classList.remove('is-open');
+                }
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (window.innerWidth > 768) return;
+            if (event.target.closest('.sidebar')) return;
+            closeAllSidebars();
+        });
+    }
 
     const year = document.getElementById('year');
     if (year) year.textContent = new Date().getFullYear();

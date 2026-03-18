@@ -840,6 +840,11 @@
     border-radius: var(--radius);
     box-shadow: 0 4px 16px rgba(7, 38, 74, 0.1);
     transition: box-shadow 300ms ease;
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-family: inherit;
+    text-align: inherit;
 }
 
 .mission-vision-card:hover {
@@ -890,8 +895,8 @@
 
 .card-text p {
     margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.78rem;
+    line-height: 1.5;
     color: #f1f5f9;
 }
 
@@ -908,22 +913,52 @@
         padding: 0 15px;
     }
 
+    .mission-vision-card {
+        display: block;
+        height: auto;
+        overflow: hidden;
+        border: none;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+    }
+
     .mission-vision-card .card-image {
         height: 220px;
     }
     
     .card-text {
+        position: static;
+        height: auto;
+        max-height: 0;
+        opacity: 0;
+        padding: 0 16px;
+        overflow: hidden;
+        transform: translateY(-10px);
+        transition: max-height 380ms ease, opacity 280ms ease, transform 280ms ease, padding 280ms ease;
+        background: linear-gradient(135deg, rgba(7, 38, 74, 0.95) 0%, rgba(55, 47, 119, 0.95) 100%);
+        cursor: default;
+        width: 100%;
+    }
+
+    .mission-vision-section.is-mission-revealed .mission-text,
+    .mission-vision-section.is-vision-revealed .vision-text {
+        max-height: 520px;
+        opacity: 1;
         padding: 16px;
+        transform: translateY(0);
     }
     
     .card-text h3 {
         font-size: 1.2rem;
         margin-bottom: 10px;
+        color: #ffd166;
     }
     
     .card-text p {
-        font-size: 0.85rem;
+        font-size: 0.78rem;
         line-height: 1.5;
+        color: #f1f5f9;
     }
 }
 
