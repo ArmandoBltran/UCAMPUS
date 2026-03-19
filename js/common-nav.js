@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const root = document.documentElement;
+    const themeToggleButtons = document.querySelectorAll('.nav-theme-toggle');
     const navMobile = document.getElementById('nav-mobile');
     const navPrev = document.getElementById('nav-prev');
     const navNext = document.getElementById('nav-next');
@@ -9,6 +11,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebars = document.querySelectorAll('.sidebar');
 
     let currentNavItem = 0;
+    const THEME_STORAGE_KEY = 'ucampus-theme';
+
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            root.setAttribute('data-theme', 'dark');
+        } else {
+            root.removeAttribute('data-theme');
+        }
+
+        const isDark = theme === 'dark';
+        themeToggleButtons.forEach((button) => {
+            button.textContent = isDark ? 'Modo claro' : 'Modo oscuro';
+            button.setAttribute('aria-pressed', String(isDark));
+            button.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+            button.setAttribute('title', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+        });
+    }
+
+    function getInitialTheme() {
+        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+            return savedTheme;
+        }
+
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function toggleTheme() {
+        const nextTheme = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+        localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+    }
+
+    applyTheme(getInitialTheme());
+
+    themeToggleButtons.forEach((button) => {
+        button.addEventListener('click', toggleTheme);
+    });
 
     function updateMobileNav(index) {
         if (!navMobileItems.length) return;
@@ -43,6 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navMobileItems.forEach((item) => {
             item.addEventListener('click', () => {
+                if (item.dataset.action === 'toggle-theme') {
+                    toggleTheme();
+                    return;
+                }
                 navigateTo(item.dataset.link);
             });
         });
@@ -59,7 +103,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if (e.key === 'Enter') {
                     const activeItem = navMobileItems[currentNavItem];
-                    if (activeItem) navigateTo(activeItem.dataset.link);
+                    if (activeItem && activeItem.dataset.action === 'toggle-theme') {
+                        toggleTheme();
+                    } else if (activeItem) {
+                        navigateTo(activeItem.dataset.link);
+                    }
                 }
             }
         });
