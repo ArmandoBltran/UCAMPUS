@@ -28,9 +28,55 @@
     box-shadow: 0 3px 12px rgba(22, 34, 45, 0.05);
 }
 
+.flow-card.is-expanded {
+    border-color: #a5bccf;
+    box-shadow: 0 10px 24px rgba(22, 34, 45, 0.12);
+}
+
+.flow-step-head {
+    display: grid;
+    gap: 8px;
+}
+
 .flow-card h3 {
     margin: 0 0 10px;
     color: #1f2f40;
+}
+
+.flow-step-summary {
+    margin: 0;
+    color: #506172;
+    line-height: 1.4;
+}
+
+.flow-step-toggle {
+    justify-self: start;
+    border: 1px solid #8ba7bb;
+    border-radius: 999px;
+    background: #f1f7fb;
+    color: #1d3b53;
+    font: inherit;
+    font-weight: 700;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.flow-step-toggle:hover,
+.flow-step-toggle:focus-visible {
+    background: #e4f0f8;
+    border-color: #6a8ea9;
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.flow-step-toggle.is-open {
+    background: #d9eaf6;
+    border-color: #5c84a1;
+}
+
+.flow-step-content {
+    margin-top: 14px;
 }
 
 .flow-step1-note {

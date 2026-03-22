@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/estiloscomunes.css?v=20260318">
         <link rel="stylesheet" href="css/inicio-estilos.css?v=20260317">
-        <link rel="stylesheet" href="css/tramites-estilos.css?v=20260321">
+        <link rel="stylesheet" href="css/tramites-estilos.css?v=20260322">
         <link rel="icon" type="image/png" href="universidad-carolina-logo.png?v=20260318">
         <link rel="shortcut icon" href="universidad-carolina-logo.png?v=20260318">
         <link rel="apple-touch-icon" href="universidad-carolina-logo.png?v=20260318">
@@ -156,38 +156,83 @@
 
                 <div class="inscripcion-flow-grid">
                     <article class="flow-card flow-card-step1" aria-labelledby="flow-step1-title">
-                        <h3 id="flow-step1-title">Paso 1. Reúne los requisitos</h3>
-                        <p id="flow-step1-note" class="flow-step1-note"><strong>Nivel seleccionado:</strong> Preparatoria</p>
-                        <ul id="flow-step1-list" class="flow-list">
-                            <li>Preparatoria terminada (certificado o constancia oficial).</li>
-                            <li>Acta de nacimiento vigente.</li>
-                            <li>CURP y copia de identificación oficial.</li>
-                            <li>Comprobante de domicilio reciente.</li>
-                        </ul>
+                        <div class="flow-step-head">
+                            <h3 id="flow-step1-title">Paso 1. Reúne los requisitos</h3>
+                            <p class="flow-step-summary">Elige tu nivel y revisa solo los documentos necesarios.</p>
+                            <button
+                                type="button"
+                                class="flow-step-toggle is-open"
+                                data-flow-target="flow-step1-content"
+                                aria-expanded="true"
+                                aria-controls="flow-step1-content"
+                            >
+                                Ocultar detalles
+                            </button>
+                        </div>
 
-                        <div class="flow-level-tabs" role="tablist" aria-label="Nivel académico para requisitos">
-                            <button type="button" class="flow-level-tab is-active" data-flow-level="preparatoria" role="tab" aria-selected="true">Preparatoria</button>
-                            <button type="button" class="flow-level-tab" data-flow-level="profesional" role="tab" aria-selected="false">Profesional</button>
-                            <button type="button" class="flow-level-tab" data-flow-level="maestria" role="tab" aria-selected="false">Maestría</button>
+                        <div id="flow-step1-content" class="flow-step-content">
+                            <p id="flow-step1-note" class="flow-step1-note"><strong>Nivel seleccionado:</strong> Preparatoria</p>
+                            <ul id="flow-step1-list" class="flow-list">
+                                <li>Preparatoria terminada (certificado o constancia oficial).</li>
+                                <li>Acta de nacimiento vigente.</li>
+                                <li>CURP y copia de identificación oficial.</li>
+                                <li>Comprobante de domicilio reciente.</li>
+                            </ul>
+
+                            <div class="flow-level-tabs" role="tablist" aria-label="Nivel académico para requisitos">
+                                <button type="button" class="flow-level-tab is-active" data-flow-level="preparatoria" role="tab" aria-selected="true">Preparatoria</button>
+                                <button type="button" class="flow-level-tab" data-flow-level="profesional" role="tab" aria-selected="false">Profesional</button>
+                                <button type="button" class="flow-level-tab" data-flow-level="maestria" role="tab" aria-selected="false">Maestría</button>
+                            </div>
                         </div>
                     </article>
 
                     <article class="flow-card" aria-labelledby="flow-step2-title">
-                        <h3 id="flow-step2-title">Paso 2. Registro</h3>
-                        <ul class="flow-list">
-                            <li>Acude al área de admisiones en las instalaciones de la Universidad Carolina.</li>
-                            <li>Realiza el registro de tus datos para obtener tu matrícula.</li>
-                            <li>No es necesario presentar todos los documentos al momento del registro; la fecha límite de entrega se asigna según tu nivel académico.</li>
-                        </ul>
+                        <div class="flow-step-head">
+                            <h3 id="flow-step2-title">Paso 2. Registro</h3>
+                            <p class="flow-step-summary">Te registras en admisiones y obtienes tu matrícula.</p>
+                            <button
+                                type="button"
+                                class="flow-step-toggle"
+                                data-flow-target="flow-step2-content"
+                                aria-expanded="false"
+                                aria-controls="flow-step2-content"
+                            >
+                                Ver detalles
+                            </button>
+                        </div>
+
+                        <div id="flow-step2-content" class="flow-step-content" hidden>
+                            <ul class="flow-list">
+                                <li>Acude al área de admisiones en las instalaciones de la Universidad Carolina.</li>
+                                <li>Realiza el registro de tus datos para obtener tu matrícula.</li>
+                                <li>No es necesario presentar todos los documentos al momento del registro; la fecha límite de entrega se asigna según tu nivel académico.</li>
+                            </ul>
+                        </div>
                     </article>
 
                     <article class="flow-card" aria-labelledby="flow-step3-title">
-                        <h3 id="flow-step3-title">Paso 3. Pago de inscripción</h3>
-                        <ul class="flow-list">
-                            <li>Con tu número de matrícula acude a caja para realizar tu pago.</li>
-                            <li>Debes cubrir este pago en su totalidad para formalizar tu inscripción. Puedes pagar en efectivo o con tarjetas de crédito o débito.</li>
-                            <li>La cuota de inscripción varía de acuerdo al programa académico. Para consultar costos, escribe a <a class="admisiones-mail" href="mailto:admisiones@ucarolina.mx">admisiones@ucarolina.mx</a>.</li>
-                        </ul>
+                        <div class="flow-step-head">
+                            <h3 id="flow-step3-title">Paso 3. Pago de inscripción</h3>
+                            <p class="flow-step-summary">Formaliza tu inscripción con el pago correspondiente.</p>
+                            <button
+                                type="button"
+                                class="flow-step-toggle"
+                                data-flow-target="flow-step3-content"
+                                aria-expanded="false"
+                                aria-controls="flow-step3-content"
+                            >
+                                Ver detalles
+                            </button>
+                        </div>
+
+                        <div id="flow-step3-content" class="flow-step-content" hidden>
+                            <ul class="flow-list">
+                                <li>Con tu número de matrícula acude a caja para realizar tu pago.</li>
+                                <li>Debes cubrir este pago en su totalidad para formalizar tu inscripción. Puedes pagar en efectivo o con tarjetas de crédito o débito.</li>
+                                <li>La cuota de inscripción varía de acuerdo al programa académico. Para consultar costos, escribe a <a class="admisiones-mail" href="mailto:admisiones@ucarolina.mx">admisiones@ucarolina.mx</a>.</li>
+                            </ul>
+                        </div>
                     </article>
                 </div>
             </section>
@@ -274,7 +319,7 @@
                 </div>
             </div>
         </footer>
-        <script src="js/tramites.js?v=20260321"></script>
+        <script src="js/tramites.js?v=20260322"></script>
     </body>
 </html>
 

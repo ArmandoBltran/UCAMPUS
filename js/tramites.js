@@ -1,4 +1,53 @@
 (function () {
+    const flowToggleButtons = Array.from(document.querySelectorAll('.flow-step-toggle'));
+
+    function setFlowPanelState(targetId, shouldExpand) {
+        const panel = document.getElementById(targetId);
+        if (!panel) {
+            return;
+        }
+
+        const button = flowToggleButtons.find((item) => item.dataset.flowTarget === targetId);
+        const parentCard = panel.closest('.flow-card');
+
+        panel.hidden = !shouldExpand;
+
+        if (button) {
+            button.setAttribute('aria-expanded', shouldExpand ? 'true' : 'false');
+            button.classList.toggle('is-open', shouldExpand);
+            button.textContent = shouldExpand ? 'Ocultar detalles' : 'Ver detalles';
+        }
+
+        if (parentCard) {
+            parentCard.classList.toggle('is-expanded', shouldExpand);
+        }
+    }
+
+    if (flowToggleButtons.length) {
+        flowToggleButtons.forEach((button) => {
+            const panelId = button.dataset.flowTarget;
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            setFlowPanelState(panelId, isExpanded);
+        });
+
+        flowToggleButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const panelId = button.dataset.flowTarget;
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                // Mantiene solo un paso abierto a la vez para reducir texto visible.
+                flowToggleButtons.forEach((item) => {
+                    const currentId = item.dataset.flowTarget;
+                    if (currentId !== panelId) {
+                        setFlowPanelState(currentId, false);
+                    }
+                });
+
+                setFlowPanelState(panelId, !isExpanded);
+            });
+        });
+    }
+
     const flowTabs = Array.from(document.querySelectorAll('.flow-level-tab'));
     const flowStep1List = document.getElementById('flow-step1-list');
     const flowStep1Note = document.getElementById('flow-step1-note');
