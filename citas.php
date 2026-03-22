@@ -1,12 +1,10 @@
 <?php
-declare(strict_types=1);
-
 header('Content-Type: text/plain; charset=UTF-8');
 
 // Datos de la base de datos
 $host = 'localhost';
 $user = 'ucamzqgl_ArmandoBltran';
-$password = 'Yvk4b85ELs4aGhD';
+$password = 'SABJ081125HCLNLNA1';
 $db = 'ucamzqgl_Citas';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -57,7 +55,7 @@ if (!$conn) {
 
 mysqli_set_charset($conn, 'utf8mb4');
 
-$stmt = mysqli_prepare($conn, 'INSERT INTO citas (name, email, servicio, fecha_hora) VALUES (?, ?, ?, ?)');
+$stmt = mysqli_prepare($conn, 'INSERT INTO citas (`name`, email, servicio, fecha_hora) VALUES (?, ?, ?, ?)');  // `name` con backticks por ser palabra clave de MySQL
 if (!$stmt) {
     http_response_code(500);
     echo 'Error al preparar la consulta.';
