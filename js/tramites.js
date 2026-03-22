@@ -69,6 +69,7 @@
     const selectedTimeText = document.getElementById('selected-time-text');
     const message = document.getElementById('appointment-message');
     const slotButtons = Array.from(document.querySelectorAll('.slot-btn'));
+    let selectedSlotTime = '';
 
     // Evita seleccionar fechas pasadas en el campo date.
     const today = new Date();
@@ -77,6 +78,7 @@
 
     function resetSlotSelection() {
         slotButtons.forEach((item) => item.classList.remove('active'));
+        selectedSlotTime = '';
         timeInput.value = '';
         selectedTimeText.textContent = 'Horario seleccionado: ninguno';
     }
@@ -89,12 +91,13 @@
         button.addEventListener('click', () => {
             slotButtons.forEach((item) => item.classList.remove('active'));
             button.classList.add('active');
-            timeInput.value = button.dataset.time || '';
+            selectedSlotTime = button.dataset.time || '';
+            timeInput.value = selectedSlotTime;
             selectedTimeText.textContent = `Horario seleccionado: ${button.textContent.trim()}`;
         });
     });
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
         event.preventDefault();
         message.className = 'appointment-message';
 
@@ -105,7 +108,7 @@
             return;
         }
 
-        if (!timeInput.value) {
+        if (!selectedSlotTime) {
             message.textContent = 'Selecciona un horario disponible entre 9:00 AM y 3:00 PM.';
             message.classList.add('error');
             return;
@@ -115,11 +118,41 @@
         const email = document.getElementById('appointment-email').value.trim();
         const serviceSelect = document.getElementById('appointment-service');
         const serviceText = serviceSelect.options[serviceSelect.selectedIndex].text;
+        const fechaHora = `${dateInput.value} ${selectedSlotTime}:00`;
 
-        message.textContent = `Cita apartada para ${name} el ${dateInput.value} a las ${timeInput.value}. Te contactaremos en ${email} para confirmar (${serviceText}).`;
-        message.classList.add('success');
-        form.reset();
-        dateInput.min = minDate;
-        resetSlotSelection();
+        // Sincroniza el hidden con la variable antes de enviar al backend.
+        timeInput.value = selectedSlotTime;
+
+        try {
+            const payload = new URLSearchParams({
+                nombre: name,
+                email,
+                servicio: serviceSelect.value,
+                fecha: fechaHora
+            });
+
+            const response = await fetch('citas.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: payload.toString()
+            });
+
+            const serverMessage = (await response.text()).trim();
+
+            if (!response.ok) {
+                throw new Error(serverMessage || 'No se pudo guardar la cita en el servidor.');
+            }
+
+            message.textContent = serverMessage || `Cita apartada para ${name} el ${dateInput.value} a las ${selectedSlotTime}. Te contactaremos en ${email} para confirmar (${serviceText}).`;
+            message.classList.add('success');
+            form.reset();
+            dateInput.min = minDate;
+            resetSlotSelection();
+        } catch (error) {
+            message.textContent = error.message || 'Ocurrió un error al enviar la cita. Intenta nuevamente.';
+            message.classList.add('error');
+        }
     });
 })();
