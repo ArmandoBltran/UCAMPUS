@@ -78,6 +78,33 @@
     margin-left: 20px;
 }
 
+.game-retry-btn {
+    background: #333;
+    color: #fff;
+    border: 2px solid #333;
+    border-radius: 8px;
+    height: 36px;
+    padding: 0 14px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 16px;
+}
+
+.game-retry-btn:hover {
+    background: #111;
+    border-color: #111;
+    transform: translateY(-1px);
+}
+
+.game-retry-btn:active {
+    transform: translateY(0);
+}
+
 .game-close-btn:hover {
     background: #efefef;
     border-color: #999;
@@ -133,6 +160,13 @@
         margin-left: 10px;
     }
 
+    .game-retry-btn {
+        height: 32px;
+        font-size: 12px;
+        padding: 0 10px;
+        margin-left: auto;
+    }
+
     #game-canvas {
         border-width: 2px;
         border-radius: 6px;
@@ -161,6 +195,12 @@
         width: 28px;
         height: 28px;
         font-size: 18px;
+    }
+
+    .game-retry-btn {
+        height: 28px;
+        font-size: 11px;
+        padding: 0 9px;
     }
 
     #game-canvas {

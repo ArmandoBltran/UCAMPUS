@@ -20,6 +20,7 @@ class DinoGame {
         this.cloudX = [];
         this.maxScore = 0;
         this.gameOver = false;
+        this.retryButton = null;
     }
 
     init() {
@@ -44,6 +45,7 @@ class DinoGame {
                     <span class="score-label">SCORE</span>
                     <span class="score-value">0</span>
                 </span>
+                <button class="game-retry-btn" type="button" hidden>Reintentar</button>
                 <button class="game-close-btn">&times;</button>
             </div>
             <canvas id="game-canvas"></canvas>
@@ -57,6 +59,13 @@ class DinoGame {
         this.gameContainer.querySelector('.game-close-btn').addEventListener('click', () => {
             this.closeGame();
         });
+
+        this.retryButton = this.gameContainer.querySelector('.game-retry-btn');
+        if (this.retryButton) {
+            this.retryButton.addEventListener('click', () => {
+                this.restartGame();
+            });
+        }
     }
 
     setupCanvas() {
@@ -296,6 +305,9 @@ class DinoGame {
     endGame() {
         this.gameRunning = false;
         this.gameOver = true;
+        if (this.retryButton) {
+            this.retryButton.hidden = false;
+        }
         
         // Overlay semi-transparente
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
@@ -309,6 +321,29 @@ class DinoGame {
         
         this.ctx.font = '20px Arial';
         this.ctx.fillText(`Puntuación: ${this.score}`, this.gameCanvas.width / 2, this.gameCanvas.height / 2 + 20);
+    }
+
+    restartGame() {
+        this.score = 0;
+        this.gameSpeed = 6;
+        this.obstacles = [];
+        this.isJumping = false;
+        this.velocityY = 0;
+        this.obstacleSpawnRate = 120;
+        this.spawnCounter = 0;
+        this.dinoY = this.groundLevel;
+        this.frameCount = 0;
+        this.gameOver = false;
+        this.generateClouds();
+        if (this.retryButton) {
+            this.retryButton.hidden = true;
+        }
+        const scoreValue = this.gameContainer && this.gameContainer.querySelector('.score-value');
+        if (scoreValue) {
+            scoreValue.textContent = '0';
+        }
+        this.gameRunning = true;
+        this.gameLoop();
     }
 
     closeGame() {
