@@ -31,7 +31,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$serviciosPermitidos = ['inscripcion', 'constancia', 'beca', 'asesoria'];
+$serviciosPermitidos = ['inscripcion', 'constancia', 'beca', 'club'];
 if (!in_array($servicio, $serviciosPermitidos, true)) {
     http_response_code(400);
     echo 'Servicio invalido.';
