@@ -132,12 +132,66 @@
         selectedTimeText.textContent = 'Horario seleccionado: ninguno';
     }
 
-    dateInput.addEventListener('change', () => {
+    function setUnavailableSlots(occupiedTimes) {
+        const occupiedSet = new Set(occupiedTimes);
+
+        slotButtons.forEach((button) => {
+            const slotTime = button.dataset.time || '';
+            const isUnavailable = occupiedSet.has(slotTime);
+
+            button.disabled = isUnavailable;
+            button.classList.toggle('is-unavailable', isUnavailable);
+            button.setAttribute('aria-disabled', isUnavailable ? 'true' : 'false');
+
+            if (isUnavailable && selectedSlotTime === slotTime) {
+                resetSlotSelection();
+            }
+        });
+    }
+
+    async function refreshSlotsForDate() {
+        const selectedDate = dateInput.value;
+
+        // Si no hay fecha, deja todos los horarios habilitados.
+        if (!selectedDate) {
+            setUnavailableSlots([]);
+            return;
+        }
+
+        try {
+            const response = await fetch(`api_citas.php?date=${encodeURIComponent(selectedDate)}`, {
+                method: 'GET',
+                cache: 'no-store'
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'No se pudo consultar disponibilidad.');
+            }
+
+            const occupiedTimes = Array.isArray(data.occupied_times) ? data.occupied_times : [];
+            setUnavailableSlots(occupiedTimes);
+        } catch (error) {
+            setUnavailableSlots([]);
+            message.textContent = error.message || 'No se pudo verificar disponibilidad de horarios.';
+            message.className = 'appointment-message error';
+        }
+    }
+
+    dateInput.addEventListener('change', async () => {
         resetSlotSelection();
+        message.textContent = '';
+        message.className = 'appointment-message';
+        await refreshSlotsForDate();
     });
 
     slotButtons.forEach((button) => {
         button.addEventListener('click', () => {
+            if (button.disabled) {
+                return;
+            }
+
             slotButtons.forEach((item) => item.classList.remove('active'));
             button.classList.add('active');
             selectedSlotTime = button.dataset.time || '';
@@ -199,9 +253,12 @@
             form.reset();
             dateInput.min = minDate;
             resetSlotSelection();
+            await refreshSlotsForDate();
         } catch (error) {
             message.textContent = error.message || 'Ocurrió un error al enviar la cita. Intenta nuevamente.';
             message.classList.add('error');
         }
     });
+
+    setUnavailableSlots([]);
 })();

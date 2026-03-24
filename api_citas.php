@@ -21,6 +21,43 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 // GET /api_citas.php  → devuelve todas las citas
 if ($method === 'GET') {
+    $date = trim($_GET['date'] ?? '');
+
+    if ($date !== '') {
+        $dateObj = DateTime::createFromFormat('Y-m-d', $date);
+        $dateValida = $dateObj && $dateObj->format('Y-m-d') === $date;
+
+        if (!$dateValida) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Formato de fecha invalido.']);
+            mysqli_close($conn);
+            exit;
+        }
+
+        $stmt = mysqli_prepare($conn, 'SELECT DATE_FORMAT(fecha_hora, "%H:%i") AS hora FROM citas WHERE DATE(fecha_hora) = ? ORDER BY fecha_hora ASC');
+        if (!$stmt) {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al preparar consulta de horarios.']);
+            mysqli_close($conn);
+            exit;
+        }
+
+        mysqli_stmt_bind_param($stmt, 's', $date);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        $ocupados = [];
+        while ($row = mysqli_fetch_assoc($result)) {
+            $ocupados[] = $row['hora'];
+        }
+
+        mysqli_stmt_close($stmt);
+        http_response_code(200);
+        echo json_encode(['date' => $date, 'occupied_times' => $ocupados]);
+        mysqli_close($conn);
+        exit;
+    }
+
     $result = mysqli_query($conn, 'SELECT id, `name`, email, servicio, fecha_hora, estatus FROM citas ORDER BY fecha_hora ASC');
     if (!$result) {
         http_response_code(500);

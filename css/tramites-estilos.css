@@ -247,6 +247,17 @@
     color: #355448;
 }
 
+.slot-btn.is-unavailable,
+.slot-btn:disabled {
+    cursor: not-allowed;
+    transform: none;
+    background: #f1f4f6;
+    border-color: #cad4db;
+    color: #8a98a5;
+    box-shadow: none;
+    text-decoration: line-through;
+}
+
 .confirm-btn {
     margin-top: 18px;
     width: min(420px, 100%);
