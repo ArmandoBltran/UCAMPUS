@@ -1,0 +1,33 @@
+# Cache control to avoid stale HTML/pages in shared hosting
+<IfModule mod_headers.c>
+  # Force browsers/proxies to revalidate HTML so page structure updates immediately
+  <FilesMatch "\.(html?|php)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # Static assets can be cached, because query-string versioning is used (?v=...)
+  <FilesMatch "\.(css|js|png|jpe?g|gif|svg|webp|ico)$">
+    Header set Cache-Control "public, max-age=2592000, immutable"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML/PHP should not stay cached
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/xhtml+xml "access plus 0 seconds"
+  ExpiresByType application/x-httpd-php "access plus 0 seconds"
+
+  # Static assets: 30 days
+  ExpiresByType text/css "access plus 30 days"
+  ExpiresByType application/javascript "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/gif "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+</IfModule>
