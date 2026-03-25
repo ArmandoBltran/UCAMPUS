@@ -200,14 +200,14 @@
 }
 
 .clubes-detalle-main {
-    width: min(1180px, 94%);
-    margin: 28px auto 40px;
+    width: min(1240px, 95%);
+    margin: 24px auto 42px;
 }
 
 .clubes-detalle-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
 }
 
 .club-card {
@@ -217,7 +217,14 @@
     border: 2px solid #07264a;
     background: #ffffff;
     overflow: hidden;
-    min-height: 220px;
+    min-height: 280px;
+    box-shadow: 0 6px 18px rgba(7, 38, 74, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.club-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(7, 38, 74, 0.14);
 }
 
 .club-image-button {
@@ -228,6 +235,8 @@
     width: 100%;
     cursor: pointer;
     flex: 1 1 auto;
+    min-height: 280px;
+    position: relative;
     transition: flex-basis 0.35s ease, width 0.35s ease;
 }
 
@@ -235,8 +244,9 @@
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 220px;
+    min-height: 280px;
     object-fit: cover;
+    object-position: center;
 }
 
 .club-info {
@@ -262,13 +272,17 @@
     line-height: 1.45;
 }
 
+.club-card.is-open {
+    grid-column: 1 / -1;
+}
+
 .club-card.is-open .club-image-button {
     flex: 0 0 42%;
 }
 
 .club-card.is-open .club-info {
     width: 58%;
-    max-height: 600px;
+    max-height: 760px;
     opacity: 1;
     transform: translateX(0);
     padding: 22px 24px;
@@ -276,12 +290,25 @@
 }
 
 @media (max-width: 900px) {
+    .clubes-detalle-lista {
+        grid-template-columns: 1fr;
+    }
+
     .club-card {
         flex-direction: column;
+        min-height: 0;
+    }
+
+    .club-image-button {
+        min-height: 220px;
     }
 
     .club-image {
-        min-height: 180px;
+        min-height: 220px;
+    }
+
+    .club-card.is-open {
+        grid-column: auto;
     }
 
     .club-card.is-open .club-image-button {
@@ -294,5 +321,72 @@
         max-height: 800px;
         border-left-width: 0;
         border-top: 2px solid #07264a;
+    }
+
+    .clubes-deportivos-main .clubes-detalle-lista {
+        gap: 14px;
+    }
+
+    .clubes-deportivos-main .club-card {
+        min-height: 0;
+    }
+
+    .clubes-deportivos-main .club-image-button,
+    .clubes-deportivos-main .club-image {
+        min-height: 200px;
+        height: 200px;
+    }
+
+    .clubes-deportivos-main .club-card.is-open .club-info {
+        padding: 16px 18px;
+    }
+}
+
+@media (max-width: 560px) {
+    .clubes-detalle-main {
+        width: min(1240px, 96%);
+        margin-top: 18px;
+    }
+
+    .club-image-button {
+        min-height: 190px;
+    }
+
+    .club-image {
+        min-height: 190px;
+    }
+
+    .clubes-deportivos-main .clubes-detalle-main {
+        width: min(1240px, 97%);
+    }
+
+    .clubes-deportivos-main .clubes-detalle-lista {
+        gap: 12px;
+    }
+
+    .clubes-deportivos-main .club-image-button,
+    .clubes-deportivos-main .club-image {
+        min-height: 170px;
+        height: 170px;
+    }
+
+    .clubes-deportivos-main .club-info h3 {
+        font-size: 1.12rem;
+    }
+
+    .clubes-deportivos-main .club-info p {
+        font-size: 0.98rem;
+        line-height: 1.4;
+    }
+
+    .clubes-deportivos-main .club-card.is-open .club-info {
+        padding: 14px 14px 16px;
+    }
+}
+
+@media (hover: none) {
+    .club-card:hover {
+        transform: none;
+        box-shadow: 0 6px 18px rgba(7, 38, 74, 0.08);
     }
 }
