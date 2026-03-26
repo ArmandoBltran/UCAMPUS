@@ -8,7 +8,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/estiloscomunes.css?v=20260318">
-        <link rel="stylesheet" href="css/clubes-estilos.css?v=20260317">
+        <link rel="stylesheet" href="css/clubes-estilos.css?v=20260326c">
         <link rel="icon" type="image/png" href="universidad-carolina-logo.png?v=20260336">
         <link rel="shortcut icon" href="universidad-carolina-logo.png?v=20260336">
         <link rel="apple-touch-icon" href="universidad-carolina-logo.png?v=20260336">
@@ -60,8 +60,7 @@
                     <div class="nav-mobile-display">
                         <span class="nav-mobile-item" data-link="index.html">Inicio</span>
                         <span class="nav-mobile-item" data-link="admisiones.html">Admisiones</span>
-                        <span class="nav-mobile-item" data-link="clubes-deportivos.html">Deportivos</span>
-                        <span class="nav-mobile-item" data-link="clubes-culturales.html?v=20260337">Culturales</span>
+                        <span class="nav-mobile-item" data-link="clubes.html">Clubes</span>
                         <span class="nav-mobile-item" data-link="tramites.html">Trámites</span>
                         <span class="nav-mobile-item" data-link="https://i-escolar.com/muralweb/login/">Innovat</span>
                     </div>
@@ -70,26 +69,62 @@
             </div>
         </header>
         <main class="clubes-main">
-            <section class="clubes-grid">
-                <!-- Tarjeta de Clubes Deportivos -->
-                <div class="clube-card clube-card-left" data-type="deportivos" data-link="clubes-deportivos.html">
-                    <img src="WhatsApp Image 2026-02-11 at 7.42.14 AM.jpeg?v=20260336" alt="Clubes Deportivos" class="clube-image">
-                    <div class="clube-overlay">
-                        <div class="clube-content">
-                            <div class="clube-label">Deportivos</div>
-                        </div>
+            <div class="clubes-shell">
+                <section class="clubes-hero" aria-label="Introduccion a los clubes universitarios">
+                    <div class="clubes-hero-copy">
+                        <p class="clubes-kicker">Vida estudiantil UCAMPUS</p>
+                        <h1 class="clubes-title">Tu espacio para competir, crear, presentarte y crecer en comunidad.</h1>
+                        <p class="clubes-subtitle">Descubre clubes deportivos y culturales pensados para preparatoria y nivel superior. Elige la ruta que mejor conecte con tu energia, tu disciplina y tu forma de expresarte dentro del campus.</p>
                     </div>
-                </div>
-                <!-- Tarjeta de Clubes Culturales -->
-                <div class="clube-card clube-card-right" data-type="culturales" data-link="clubes-culturales.html?v=20260337">
-                    <img src="WhatsApp Image 2026-03-17 at 9.59.36 AM (3).jpeg?v=20260336" alt="Clubes Culturales" class="clube-image">
-                    <div class="clube-overlay">
-                        <div class="clube-content">
-                            <div class="clube-label">Culturales</div>
-                        </div>
+                    <div class="clubes-highlights" aria-label="Aspectos destacados de los clubes">
+                        <article class="clubes-highlight-card">
+                            <strong>20 opciones</strong>
+                            <span>Clubes activos entre categorias deportivas y culturales</span>
+                        </article>
+                        <article class="clubes-highlight-card">
+                            <strong>Prepa y superior</strong>
+                            <span>Actividades abiertas para distintos niveles y ramas</span>
+                        </article>
+                        <article class="clubes-highlight-card">
+                            <strong>Eventos reales</strong>
+                            <span>Torneos, festivales, exhibiciones y muestras durante el ciclo escolar</span>
+                        </article>
                     </div>
-                </div>
-            </section>
+                </section>
+
+                <section class="clubes-grid" aria-label="Categorias principales de clubes">
+                    <a class="clube-card clube-card-left" href="clubes-deportivos.html">
+                        <img src="WhatsApp Image 2026-02-11 at 7.42.14 AM.jpeg?v=20260336" alt="Clubes Deportivos" class="clube-image">
+                        <div class="clube-overlay"></div>
+                        <div class="clube-content">
+                            <span class="clube-tag">Competencia y equipo</span>
+                            <h2 class="clube-label">Deportivos</h2>
+                            <p class="clube-description">Basquetbol, futbol, rugby, beisbol, taekwondo y mas disciplinas para desarrollar condicion fisica, estrategia y juego colectivo.</p>
+                            <div class="clube-meta" aria-label="Resumen de clubes deportivos">
+                                <span>11 clubes</span>
+                                <span>Torneos y entrenamiento</span>
+                                <span>Ramas femenil y varonil</span>
+                            </div>
+                            <span class="clube-cta">Ver clubes deportivos</span>
+                        </div>
+                    </a>
+                    <a class="clube-card clube-card-right" href="clubes-culturales.html?v=20260337">
+                        <img src="WhatsApp Image 2026-03-17 at 9.59.36 AM (3).jpeg?v=20260336" alt="Clubes Culturales" class="clube-image">
+                        <div class="clube-overlay"></div>
+                        <div class="clube-content">
+                            <span class="clube-tag">Escena y expresion</span>
+                            <h2 class="clube-label">Culturales</h2>
+                            <p class="clube-description">Baile, danza aerea, tecnica vocal, musica y otras experiencias para fortalecer presencia escenica, creatividad y lenguaje artistico.</p>
+                            <div class="clube-meta" aria-label="Resumen de clubes culturales">
+                                <span>9 clubes</span>
+                                <span>Festivales y muestras</span>
+                                <span>Talento interdisciplinario</span>
+                            </div>
+                            <span class="clube-cta">Ver clubes culturales</span>
+                        </div>
+                    </a>
+                </section>
+            </div>
         </main>
         <footer class="site-footer" role="contentinfo">
             <div class="container">
@@ -129,7 +164,7 @@
             </div>
         </footer>
     </body>
-    <script src="js/clubes.js?v=20260317"></script>
+    <script src="js/clubes.js?v=20260326b"></script>
 </html>
 
 
