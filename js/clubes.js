@@ -39,14 +39,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const detailCards = document.querySelectorAll('[data-club-card]');
-    detailCards.forEach((card) => {
-        const button = card.querySelector('.club-image-button');
-        if (!button) return;
-
-        button.addEventListener('click', () => {
-            const isOpen = card.classList.toggle('is-open');
-            button.setAttribute('aria-expanded', String(isOpen));
-        });
-    });
 });

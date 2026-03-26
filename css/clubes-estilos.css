@@ -206,25 +206,29 @@
 
 .clubes-detalle-lista {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .club-card {
     display: flex;
+    flex-direction: column;
     align-items: stretch;
     gap: 0;
-    border: 2px solid #07264a;
+    border: 1px solid #e5e7eb;
     background: #ffffff;
     overflow: hidden;
-    min-height: 280px;
-    box-shadow: 0 6px 18px rgba(7, 38, 74, 0.08);
+    box-shadow: 0 4px 12px rgba(7, 38, 74, 0.06);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-radius: 8px;
 }
 
 .club-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 26px rgba(7, 38, 74, 0.14);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(7, 38, 74, 0.12);
 }
 
 .club-image-button {
@@ -234,77 +238,217 @@
     background: transparent;
     width: 100%;
     cursor: pointer;
-    flex: 1 1 auto;
-    min-height: 280px;
+    flex: 0 0 240px;
+    height: 240px;
     position: relative;
-    transition: flex-basis 0.35s ease, width 0.35s ease;
+    transition: flex-basis 0.35s ease, height 0.35s ease;
+    overflow: hidden;
 }
 
 .club-image {
     display: block;
     width: 100%;
     height: 100%;
-    min-height: 280px;
     object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+/* Ajustes específicos por club para enfocar caras */
+.club-card:nth-child(1) .club-image {
+    object-position: center right;
+}
+
+.club-card:nth-child(2) .club-image {
     object-position: center;
 }
 
+.club-card:nth-child(3) .club-image {
+    object-position: center top;
+}
+
+.club-card:nth-child(4) .club-image {
+    object-position: center;
+}
+
+.club-card:nth-child(5) .club-image {
+    object-position: center top;
+}
+
+.club-card:nth-child(6) .club-image {
+    object-position: center;
+}
+
+.club-card:nth-child(n+7) .club-image {
+    object-position: center;
+}
+
+.club-image.focus-tecnica-vocal {
+    object-position: center top;
+}
+
+.club-image.focus-basquetbol {
+    object-position: center top;
+}
+
+/* Béisbol: las caras están en la parte central de la foto */
+.club-image.focus-beisbol {
+    object-position: center 20%;
+}
+
+.club-image.focus-taekwondo {
+    object-position: center top;
+}
+
+/* Defensa personal: mostrar toda la imagen sin recorte agresivo */
+.club-image.focus-defensa-personal {
+    object-position: center center;
+    background: #f3f4f6;
+}
+
+.club-image.focus-futbol-soccer {
+    object-position: center bottom;
+}
+
+/* Baile moderno: mostrar el centro */
+.club-image.focus-baile-moderno {
+    object-position: center center;
+}
+
+.club-image.focus-danza-aerea {
+    object-position: center bottom;
+}
+
+.club-image.focus-danza-folclorica {
+    object-position: center bottom;
+}
+
+/* Alturas de contenedor ajustadas por club */
+/* Basquetbol: un poco más alto para ver el rostro */
+.club-image-button:has(.focus-basquetbol) {
+    flex: 0 0 360px;
+    height: 360px;
+}
+
+/* Béisbol: contenedor más alto para ver torso + rostros */
+.club-image-button:has(.focus-beisbol) {
+    flex: 0 0 320px;
+    height: 320px;
+}
+
+/* Defensa personal: muy alto para que quepa la imagen completa */
+.club-image-button:has(.focus-defensa-personal) {
+    flex: 0 0 420px;
+    height: 420px;
+}
+
+/* Futbol soccer: muy alto para revelar la acción abajo */
+.club-image-button:has(.focus-futbol-soccer) {
+    flex: 0 0 400px;
+    height: 400px;
+}
+
+/* Baile moderno: altura normal, mostrar centro */
+.club-image-button:has(.focus-baile-moderno) {
+    flex: 0 0 300px;
+    height: 300px;
+}
+
+/* Danza aérea: más alto para revelar la parte de abajo */
+.club-image-button:has(.focus-danza-aerea) {
+    flex: 0 0 380px;
+    height: 380px;
+}
+
+/* Danza folclórica: más alto para revelar la parte de abajo */
+.club-image-button:has(.focus-danza-folclorica) {
+    flex: 0 0 380px;
+    height: 380px;
+}
+
+/* Técnica vocal y Taekwondo: contenedor alto para mostrar rostro arriba */
+.club-image-button:has(.focus-tecnica-vocal),
+.club-image-button:has(.focus-taekwondo) {
+    flex: 0 0 320px;
+    height: 320px;
+}
+
+.club-card:hover .club-image {
+    transform: scale(1.05);
+}
+
 .club-info {
-    width: 0;
-    max-height: 0;
-    opacity: 0;
-    padding: 0;
+    padding: 18px 16px;
+    width: 100%;
+    max-height: none;
+    opacity: 1;
     overflow: hidden;
-    transform: translateX(10px);
-    transition: width 0.35s ease, max-height 0.35s ease, opacity 0.25s ease, transform 0.35s ease, padding 0.35s ease;
-    border-left: 0 solid #07264a;
+    transform: none;
+    transition: max-height 0.35s ease, opacity 0.25s ease, padding 0.35s ease;
+    border-left: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .club-info h3 {
-    margin: 0 0 8px;
+    margin: 0;
     color: #07264a;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
 .club-info p {
-    margin: 0 0 8px;
-    color: #1f2937;
-    line-height: 1.45;
+    margin: 0;
+    color: #4b5563;
+    line-height: 1.5;
+    font-size: 0.95rem;
 }
 
 .club-card.is-open {
-    grid-column: 1 / -1;
+    grid-column: auto;
 }
 
 .club-card.is-open .club-image-button {
-    flex: 0 0 42%;
+    flex: 0 0 240px;
+    height: 240px;
+}
+
+.club-card.is-open .club-image {
+    height: 240px;
 }
 
 .club-card.is-open .club-info {
-    width: 58%;
-    max-height: 760px;
+    width: 100%;
+    max-height: none;
     opacity: 1;
-    transform: translateX(0);
-    padding: 22px 24px;
-    border-left-width: 2px;
+    transform: none;
+    padding: 18px 16px;
+    border-left-width: 0;
 }
 
 @media (max-width: 900px) {
     .clubes-detalle-lista {
         grid-template-columns: 1fr;
+        gap: 14px;
+        max-width: 100%;
     }
 
     .club-card {
         flex-direction: column;
-        min-height: 0;
     }
 
     .club-image-button {
-        min-height: 220px;
+        height: 200px;
     }
 
     .club-image {
-        min-height: 220px;
+        height: 100%;
+    }
+
+    .club-info {
+        padding: 16px 14px;
     }
 
     .club-card.is-open {
@@ -312,15 +456,17 @@
     }
 
     .club-card.is-open .club-image-button {
-        flex: 0 0 auto;
-        width: 100%;
+        height: 200px;
+    }
+
+    .club-card.is-open .club-image {
+        height: 100%;
     }
 
     .club-card.is-open .club-info {
         width: 100%;
-        max-height: 800px;
-        border-left-width: 0;
-        border-top: 2px solid #07264a;
+        max-height: none;
+        padding: 16px 14px;
     }
 
     .clubes-deportivos-main .clubes-detalle-lista {
@@ -331,10 +477,14 @@
         min-height: 0;
     }
 
-    .clubes-deportivos-main .club-image-button,
-    .clubes-deportivos-main .club-image {
+    .clubes-deportivos-main .club-image-button {
         min-height: 200px;
         height: 200px;
+    }
+
+    .clubes-deportivos-main .club-image {
+        min-height: 0;
+        height: 100%;
     }
 
     .clubes-deportivos-main .club-card.is-open .club-info {
@@ -348,12 +498,47 @@
         margin-top: 18px;
     }
 
+    .clubes-detalle-lista {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        max-width: 100%;
+    }
+
     .club-image-button {
-        min-height: 190px;
+        height: 180px;
     }
 
     .club-image {
-        min-height: 190px;
+        height: 100%;
+    }
+
+    .club-info {
+        padding: 14px 12px;
+    }
+
+    .club-info h3 {
+        font-size: 1.1rem;
+    }
+
+    .club-info p {
+        font-size: 0.9rem;
+    }
+
+    .club-card.is-open {
+        grid-column: auto;
+    }
+
+    .club-card.is-open .club-image-button {
+        height: 180px;
+    }
+
+    .club-card.is-open .club-image {
+        height: 100%;
+    }
+
+    .club-card.is-open .club-info {
+        width: 100%;
+        padding: 14px 12px;
     }
 
     .clubes-deportivos-main .clubes-detalle-main {
@@ -364,10 +549,14 @@
         gap: 12px;
     }
 
-    .clubes-deportivos-main .club-image-button,
-    .clubes-deportivos-main .club-image {
+    .clubes-deportivos-main .club-image-button {
         min-height: 170px;
         height: 170px;
+    }
+
+    .clubes-deportivos-main .club-image {
+        min-height: 0;
+        height: 100%;
     }
 
     .clubes-deportivos-main .club-info h3 {
