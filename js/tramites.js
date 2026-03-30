@@ -227,11 +227,20 @@
         timeInput.value = selectedSlotTime;
 
         try {
+            // Obtener token del checkbox reCAPTCHA v2
+            const recaptchaToken = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
+            if (!recaptchaToken) {
+                message.textContent = 'Confirma la casilla "No soy un robot" para continuar.';
+                message.classList.add('error');
+                return;
+            }
+
             const payload = new URLSearchParams({
                 nombre: name,
                 email,
                 servicio: serviceSelect.value,
-                fecha: fechaHora
+                fecha: fechaHora,
+                recaptcha_token: recaptchaToken
             });
 
             const response = await fetch('citas.php', {
@@ -239,26 +248,34 @@
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                 },
-                body: payload.toString()
+                body: payload.toString(),
+                credentials: 'include'
             });
 
-            const serverMessage = (await response.text()).trim();
+            const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(serverMessage || 'No se pudo guardar la cita en el servidor.');
+                throw new Error(data.error || data.mensaje || 'No se pudo guardar la cita en el servidor.');
             }
 
-            message.textContent = serverMessage || `Cita apartada para ${name} el ${dateInput.value} a las ${selectedSlotTime}. Te contactaremos en ${email} para confirmar (${serviceText}).`;
+            message.textContent = data.mensaje || `Cita apartada para ${name} el ${dateInput.value} a las ${selectedSlotTime}. Te contactaremos en ${email} para confirmar (${serviceText}).`;
             message.classList.add('success');
             form.reset();
+            if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset();
+            }
             dateInput.min = minDate;
             resetSlotSelection();
             await refreshSlotsForDate();
         } catch (error) {
             message.textContent = error.message || 'Ocurrió un error al enviar la cita. Intenta nuevamente.';
             message.classList.add('error');
+            if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset();
+            }
         }
     });
 
     setUnavailableSlots([]);
 })();
+

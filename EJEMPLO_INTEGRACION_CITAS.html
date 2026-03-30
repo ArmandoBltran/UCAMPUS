@@ -1,0 +1,534 @@
+<!-- 
+    EJEMPLO: Integración del Sistema de Citas Seguro
+    en una página HTML existente (como tramites.html)
+    
+    PASOS:
+    1. Copiar y pegar este HTML en tu sección de citas
+    2. Actualizar 'path/a/' con rutas reales de tu API
+    3. Actualizar reCAPTCHA key
+    4. Añadir CSS personalizado según tu design system
+    5. Importar js/citas-seguro.js al final
+-->
+
+<section id="seccion-citas" class="citas-container">
+    <div class="citas-header">
+        <h2>Agendar Cita</h2>
+        <p>Proceso seguro y verificado de reservación</p>
+    </div>
+
+    <!-- ALERTA DE MENSAJES -->
+    <div id="alerta-citas" class="alerta"></div>
+
+    <!-- ========================================
+         PASO 1: VERIFICACIÓN DE EMAIL
+         ======================================== -->
+    <div data-paso-citas="email" style="display: block;">
+        <div class="paso-header">
+            <span class="numero-paso">1</span>
+            <h3>Verificar tu Email</h3>
+            <p>Enviaremos un código de confirmación</p>
+        </div>
+
+        <div class="form-group">
+            <label for="email-citas">
+                📧 Correo Electrónico
+            </label>
+            <input 
+                type="email" 
+                id="email-citas" 
+                class="form-control"
+                placeholder="correo@ejemplo.com"
+                required
+            >
+            <small class="form-text">
+                Recibirás un código de 6 dígitos en este correo
+            </small>
+        </div>
+
+        <button 
+            type="button" 
+            id="btn-enviar-codigo-citas"
+            class="btn btn-primary btn-lg"
+        >
+            📨 Enviar Código de Verificación
+        </button>
+
+        <div class="recaptcha-note">
+            <small>
+                🔒 Este sitio está protegido por reCAPTCHA y aplican las
+                <a href="https://policies.google.com/privacy" target="_blank">políticas de privacidad</a> y
+                <a href="https://policies.google.com/terms" target="_blank">términos de servicio</a> de Google.
+            </small>
+        </div>
+    </div>
+
+    <!-- ========================================
+         PASO 2: VALIDAR CÓDIGO
+         ======================================== -->
+    <div data-paso-citas="codigo">
+        <div class="paso-header">
+            <span class="numero-paso">2</span>
+            <h3>Ingresa el Código</h3>
+            <p>Revisa tu email para obtener el código</p>
+        </div>
+
+        <div class="info-box info-info">
+            <p>
+                <strong>📧 Código enviado a:</strong>
+                <span id="email-confirmado" style="display: block; margin-top: 5px; font-weight: bold;"></span>
+            </p>
+            <p style="margin-top: 10px; font-size: 12px;">
+                El código expira en <strong>15 minutos</strong>
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label for="codigo-citas">
+                🔐 Código de Verificación (6 dígitos)
+            </label>
+            <input 
+                type="text" 
+                id="codigo-citas" 
+                class="form-control codigo-input"
+                placeholder="000000"
+                maxlength="6"
+                pattern="\d{6}"
+                inputmode="numeric"
+                required
+            >
+            <small class="form-text">
+                Ingresa solo números
+            </small>
+        </div>
+
+        <button 
+            type="button" 
+            id="btn-validar-codigo-citas"
+            class="btn btn-primary btn-lg"
+        >
+            ✅ Validar Código
+        </button>
+
+        <button 
+            type="button" 
+            class="btn btn-secondary"
+            onclick="window.citasManager?.mostrarPaso('email'); document.getElementById('email-citas').focus();"
+        >
+            ↩️ Cambiar Email
+        </button>
+    </div>
+
+    <!-- ========================================
+         PASO 3: COMPLETAR CITA
+         ======================================== -->
+    <form id="formulario-citas" data-paso-citas="completar">
+        <div class="paso-header">
+            <span class="numero-paso">3</span>
+            <h3>Completa tu Cita <span class="verificado-badge">✓ Verificado</span></h3>
+            <p>Proporciona los detalles de tu cita</p>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombre-citas">
+                    👤 Nombre Completo
+                </label>
+                <input 
+                    type="text" 
+                    id="nombre-citas" 
+                    class="form-control"
+                    placeholder="Juan Pérez García"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email-citas-form">
+                    📧 Correo (Verificado)
+                </label>
+                <input 
+                    type="email" 
+                    id="email-citas-form" 
+                    class="form-control"
+                    readonly
+                    style="background: #f8f9fa; cursor: not-allowed;"
+                >
+                <small class="form-text">Este campo se llena automáticamente</small>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="servicio-citas">
+                    🏢 Tipo de Servicio
+                </label>
+                <select id="servicio-citas" class="form-control" required>
+                    <option value="">-- Selecciona un servicio --</option>
+                    <option value="inscripcion">Inscripción</option>
+                    <option value="constancia">Constancia</option>
+                    <option value="beca">Beca</option>
+                    <option value="club">Club</option>
+                    <option value="asesoria">Asesoría</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fecha-citas">
+                    📅 Fecha y Hora
+                </label>
+                <input 
+                    type="datetime-local" 
+                    id="fecha-citas"
+                    class="form-control"
+                    min=""
+                    required
+                >
+                <small class="form-text">Selecciona una fecha futura disponible</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="info-box info-warning">
+                <p>
+                    <strong>📋 Importante:</strong>
+                </p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Máximo 5 citas por semana</li>
+                    <li>Verifica tu disponibilidad antes de agendar</li>
+                    <li>Recuerda 5 minutos antes de tu cita</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <button type="submit" class="btn btn-primary btn-lg btn-fullwidth">
+                🎫 Agendar Cita
+            </button>
+            <button 
+                type="button" 
+                class="btn btn-secondary"
+                onclick="window.citasManager?.resetearFormulario(); document.querySelector('[data-paso-citas=email]').style.display='block'; document.querySelector('[data-paso-citas=completar]').style.display='none'; document.getElementById('email-citas').focus();"
+            >
+                ↩️ Cancelar
+            </button>
+        </div>
+    </form>
+</section>
+
+<!-- ========================================
+     ESTILOS (Añadir a tu CSS)
+     ======================================== -->
+<style>
+    .citas-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .citas-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .citas-header h2 {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .citas-header p {
+        color: #666;
+        font-size: 16px;
+    }
+
+    .alerta {
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        display: none;
+        font-weight: 500;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .alerta-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .alerta-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alerta-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+
+    .paso-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .numero-paso {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50%;
+        font-weight: bold;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .paso-header h3 {
+        color: #333;
+        margin: 0 0 5px 0;
+        font-size: 20px;
+    }
+
+    .paso-header p {
+        color: #666;
+        margin: 0;
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-control:disabled,
+    .form-control[readonly] {
+        background-color: #f8f9fa;
+        cursor: not-allowed;
+    }
+
+    .codino-input {
+        font-size: 18px;
+        letter-spacing: 5px;
+        text-align: center;
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: inherit;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+        margin-top: 10px;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+        background: #5a6268;
+    }
+
+    .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .btn-lg {
+        padding: 14px 28px;
+        font-size: 18px;
+        width: 100%;
+    }
+
+    .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 30px;
+    }
+
+    .info-box {
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        border-left: 4px solid;
+    }
+
+    .info-info {
+        background-color: #e7f3ff;
+        color: #004085;
+        border-left-color: #004085;
+    }
+
+    .info-warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border-left-color: #856404;
+    }
+
+    .info-box p {
+        margin: 0;
+    }
+
+    .info-box ul {
+        margin: 10px 0 0 0;
+    }
+
+    .verificado-badge {
+        display: inline-block;
+        background: #28a745;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-left: 10px;
+        font-weight: normal;
+    }
+
+    .recaptcha-note {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    .recaptcha-note a {
+        color: #667eea;
+        text-decoration: none;
+    }
+
+    .recaptcha-note a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+        .citas-container {
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .paso-header {
+            flex-direction: column;
+        }
+
+        .citas-header h2 {
+            font-size: 24px;
+        }
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<!-- ========================================
+     IMPORTAR SCRIPT (Al final de tu HTML)
+     ======================================== -->
+<script src="js/citas-seguro.js"></script>
+
+<script>
+    // Configuración personalizada (ajustar rutas según necesidad)
+    document.addEventListener('DOMContentLoaded', () => {
+        // El manager se crea automáticamente desde citas-seguro.js
+        // Si necesitas personalizarlo, acceder con window.citasManager
+        
+        // Actualizar email mostrado en paso 2
+        const inputEmail = document.getElementById('email-citas');
+        const emailConfirmado = document.getElementById('email-confirmado');
+        
+        if (inputEmail) {
+            inputEmail.addEventListener('change', () => {
+                citasManager.emailVerificado = inputEmail.value;
+                emailConfirmado.textContent = inputEmail.value;
+            });
+        }
+
+        // Establecer fecha mínima (hoy)
+        const fechaInput = document.getElementById('fecha-citas');
+        if (fechaInput) {
+            const hoy = new Date().toISOString().split('T')[0];
+            fechaInput.min = hoy + 'T08:00';
+        }
+    });
+</script>
+
+<!-- 
+    NOTAS DE INTEGRACIÓN:
+    
+    1. Reemplazar 'js/citas-seguro.js' con la ruta correcta
+    2. Cambiar reCAPTCHA key en los places indicados
+    3. Ajustar nombres de clase CSS según tu design system (btn, form-control, etc)
+    4. Los colores de ejemplo usan gradiente morado/azul - cambiar según marca
+    5. Este ejemplo utiliza Bootstrap 4+ para clases base (opcional)
+    6. Personalizar mensajes de alerta según necesidad
+    7. Pruebar en mobile - está optimizado para responsive
+-->

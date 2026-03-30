@@ -239,11 +239,18 @@
             <section class="agenda-section" aria-labelledby="agenda-title">
                 <div class="agenda-card">
                     <h2 id="agenda-title">Agenda tu cita</h2>
+                    <div id="alerta-citas" class="alerta"></div>
+                    <p class="recaptcha-note-tramites">
+                        <small>Este sitio está protegido por reCAPTCHA de Google.</small>
+                    </p>
+
                     <form id="appointment-form" class="appointment-form" novalidate>
+
                         <div class="appointment-grid">
                             <div class="appointment-fields">
                                 <label class="visually-hidden" for="appointment-name">Tu nombre</label>
                                 <input id="appointment-name" name="name" type="text" placeholder="Tu nombre" required>
+                                
                                 <label class="visually-hidden" for="appointment-email">Correo electrónico</label>
                                 <input id="appointment-email" name="email" type="email" placeholder="ejemplo@mail.com" required>
                                 
@@ -275,7 +282,11 @@
                             </aside>
                         </div>
 
-                        <button type="submit" class="confirm-btn">Confirmar cita</button>
+                        <div class="form-group">
+                            <div class="g-recaptcha" data-sitekey="6LdhxZ4sAAAAAN6dHMBoE7KzYNnYR_7439b9pjwe"></div>
+                        </div>
+
+                        <button type="submit" class="confirm-btn">🎫 Confirmar cita</button>
                         <p id="appointment-message" class="appointment-message" aria-live="polite"></p>
                     </form>
                 </div>
@@ -318,7 +329,9 @@
                 </div>
             </div>
         </footer>
-        <script src="js/tramites.js?v=20260324"></script>
+        <!-- reCAPTCHA Checkbox Script -->
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="js/tramites.js?v=20260330"></script>
     </body>
 </html>
 

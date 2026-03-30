@@ -2,11 +2,18 @@
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Origin: *');
 
+session_start();
+
 // Datos de la base de datos
 $host = 'localhost';
 $user = 'ucamzqgl_ArmandoBltran';
 $password = 'SABJ081125HCLNLNA1';
 $db = 'ucamzqgl_Citas';
+
+// Clave de reCAPTCHA v2 (obtener de https://www.google.com/recaptcha/admin)
+$recaptcha_secret = '6LdhxZ4sAAAAAMaQg3z-ppMVubRB5MTnZ2IVfxQy'; // Cambiar en producción
+
+$client_ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['REMOTE_ADDR'];
 
 $conn = mysqli_connect($host, $user, $password, $db);
 if (!$conn) {
