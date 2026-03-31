@@ -3,10 +3,12 @@ header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 
-$host = 'localhost';
-$user = 'ucamzqgl_ArmandoBltran';
-$password = 'SABJ081125HCLNLNA1';
-$db = 'ucamzqgl_Citas';
+require_once __DIR__ . '/config-seguridad.php';
+
+$host = DB_HOST;
+$user = DB_USER;
+$password = DB_PASSWORD;
+$db = DB_NAME;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);

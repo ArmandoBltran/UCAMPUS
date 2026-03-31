@@ -1,14 +1,14 @@
 <?php
 header('Content-Type: application/json; charset=UTF-8');
 
-// Datos de la base de datos
-$host = 'localhost';
-$user = 'ucamzqgl_ArmandoBltran';
-$password = 'SABJ081125HCLNLNA1';
-$db = 'ucamzqgl_Citas';
+require_once __DIR__ . '/config-seguridad.php';
 
-// Clave de reCAPTCHA v2
-$recaptcha_secret = '6LdhxZ4sAAAAAMaQg3z-ppMVubRB5MTnZ2IVfxQy';
+// Datos centralizados
+$host = DB_HOST;
+$user = DB_USER;
+$password = DB_PASSWORD;
+$db = DB_NAME;
+$recaptcha_secret = RECAPTCHA_SECRET;
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
