@@ -95,6 +95,36 @@
     margin-left: 16px;
 }
 
+.game-mode-btn {
+    background: #f7f7f7;
+    color: #1f2c3b;
+    border: 2px solid #c9d2dc;
+    border-radius: 8px;
+    height: 36px;
+    padding: 0 12px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 12px;
+}
+
+.game-mode-btn:hover {
+    background: #e8eef5;
+    border-color: #8fa3b7;
+}
+
+.game-status-message {
+    margin: 8px 4px 14px;
+    min-height: 20px;
+    font-size: 13px;
+    color: #2d4460;
+    font-weight: 600;
+}
+
 .game-retry-btn:hover {
     background: #111;
     border-color: #111;
@@ -165,6 +195,13 @@
         font-size: 12px;
         padding: 0 10px;
         margin-left: auto;
+    }
+
+    .game-mode-btn {
+        height: 32px;
+        font-size: 11px;
+        padding: 0 10px;
+        margin-left: 0;
     }
 
     #game-canvas {

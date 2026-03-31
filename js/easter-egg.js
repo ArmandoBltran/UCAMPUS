@@ -21,6 +21,26 @@ class DinoGame {
         this.maxScore = 0;
         this.gameOver = false;
         this.retryButton = null;
+        this.modeButton = null;
+        this.statusMessage = null;
+        this.isHardMode = false;
+        this.jumpStrength = -15;
+        this.secondChanceSent = false;
+        this.animationFrameId = null;
+    }
+
+    applyModeSettings() {
+        if (this.isHardMode) {
+            this.gameSpeed = 8;
+            this.obstacleSpawnRate = 85;
+            this.gravity = 0.72;
+            this.jumpStrength = -16;
+        } else {
+            this.gameSpeed = 6;
+            this.obstacleSpawnRate = 120;
+            this.gravity = 0.6;
+            this.jumpStrength = -15;
+        }
     }
 
     init() {
@@ -30,6 +50,7 @@ class DinoGame {
         this.createGameContainer();
         this.setupCanvas();
         this.setupEventListeners();
+        this.applyModeSettings();
         this.generateClouds();
         this.gameRunning = true;
         this.gameLoop();
@@ -45,9 +66,11 @@ class DinoGame {
                     <span class="score-label">SCORE</span>
                     <span class="score-value">0</span>
                 </span>
+                <button class="game-mode-btn" type="button">Modo: Normal</button>
                 <button class="game-retry-btn" type="button" hidden>Reintentar</button>
                 <button class="game-close-btn">&times;</button>
             </div>
+            <p class="game-status-message" aria-live="polite"></p>
             <canvas id="game-canvas"></canvas>
         `;
         
@@ -66,6 +89,26 @@ class DinoGame {
                 this.restartGame();
             });
         }
+
+        this.modeButton = this.gameContainer.querySelector('.game-mode-btn');
+        this.statusMessage = this.gameContainer.querySelector('.game-status-message');
+        if (this.modeButton) {
+            this.modeButton.addEventListener('click', () => {
+                this.isHardMode = !this.isHardMode;
+                this.modeButton.textContent = this.isHardMode ? 'Modo: Dificil' : 'Modo: Normal';
+                this.showStatus(this.isHardMode
+                    ? 'Modo dificil activado: aves bajas, obstaculos encadenados y velocidad variable. Llega a 250 puntos para desbloquear segunda oportunidad de cita.'
+                    : 'Modo normal activado.');
+                this.restartGame();
+            });
+        }
+    }
+
+    showStatus(text) {
+        if (!this.statusMessage) {
+            return;
+        }
+        this.statusMessage.textContent = text;
     }
 
     setupCanvas() {
@@ -99,7 +142,7 @@ class DinoGame {
     jump() {
         if (!this.isJumping && this.gameRunning) {
             this.isJumping = true;
-            this.velocityY = -15;
+            this.velocityY = this.jumpStrength;
         }
     }
 
@@ -153,6 +196,11 @@ class DinoGame {
         const x = 50;
         const y = this.dinoY;
 
+        if (this.isHardMode) {
+            this.drawClassicDinoSprite(x, y);
+            return;
+        }
+
         // Cuerpo
         this.ctx.fillStyle = '#333';
         this.ctx.fillRect(x, y, 40, 50);
@@ -179,6 +227,48 @@ class DinoGame {
         this.ctx.strokeStyle = '#333';
         this.ctx.lineWidth = 3;
         this.ctx.stroke();
+    }
+
+    drawClassicDinoSprite(x, y) {
+        const scale = 3;
+        const top = y - 16;
+        const legFrame = Math.floor(this.frameCount / 6) % 2;
+        const pixels = [
+            '..........######....',
+            '.........#########...',
+            '........###########..',
+            '........###..######..',
+            '........###..######..',
+            '........##########...',
+            '........########.....',
+            '....##############...',
+            '...###############...',
+            '..#######..######....',
+            '.######....####......',
+            '######.....####......',
+            '.#####....#####......',
+            '..#############......',
+            '....###########......',
+            '.....###...###.......',
+            '.....###...###.......',
+            '.....###...###.......',
+            '.....###...###.......',
+            legFrame === 0 ? '....###.....##.......' : '.....##....###.......'
+        ];
+
+        this.ctx.fillStyle = '#444';
+        for (let row = 0; row < pixels.length; row++) {
+            const line = pixels[row];
+            for (let col = 0; col < line.length; col++) {
+                if (line[col] === '#') {
+                    this.ctx.fillRect(x + col * scale, top + row * scale, scale, scale);
+                }
+            }
+        }
+
+        // Eye highlight to mimic the original sprite look.
+        this.ctx.fillStyle = '#f5f5f5';
+        this.ctx.fillRect(x + 10 * scale, top + 3 * scale, scale, scale);
     }
 
     drawObstacle(obstacle) {
@@ -208,7 +298,52 @@ class DinoGame {
                 obstacle.x + 15, obstacle.y + 6
             );
             this.ctx.stroke();
+        } else if (obstacle.type === 'cactus-double') {
+            // Doble cactus cercano para acortar ventana de reacción
+            this.ctx.fillRect(obstacle.x, obstacle.y - 18, 16, 48);
+            this.ctx.fillRect(obstacle.x + 18, obstacle.y - 14, 14, 44);
+            this.ctx.fillRect(obstacle.x - 7, obstacle.y + 2, 7, 8);
+            this.ctx.fillRect(obstacle.x + 32, obstacle.y + 4, 7, 8);
         }
+    }
+
+    createObstacle(type, xOffset = 0) {
+        let width = 15;
+        let height = 30;
+        let y = this.groundLevel;
+
+        if (type === 'cactus-large') {
+            width = 20;
+            height = 50;
+            y = this.groundLevel;
+        } else if (type === 'bird') {
+            width = 20;
+            height = 12;
+            if (this.isHardMode) {
+                const hardBirdHeights = [22, 30, 38, 48];
+                const choice = hardBirdHeights[Math.floor(Math.random() * hardBirdHeights.length)];
+                y = this.groundLevel - choice;
+            } else {
+                y = this.groundLevel - 40;
+            }
+        } else if (type === 'cactus-double') {
+            width = 34;
+            height = 50;
+            y = this.groundLevel;
+        }
+
+        const speedMultiplier = this.isHardMode
+            ? 0.95 + Math.random() * 0.7
+            : 1;
+
+        return {
+            x: this.gameCanvas.width + xOffset,
+            y,
+            width,
+            height,
+            type,
+            speedMultiplier
+        };
     }
 
     checkCollision(x1, y1, w1, h1, obstacle) {
@@ -219,7 +354,10 @@ class DinoGame {
     }
 
     gameLoop = () => {
-        if (!this.gameRunning) return;
+        if (!this.gameRunning) {
+            this.animationFrameId = null;
+            return;
+        }
 
         // Fondo
         this.ctx.fillStyle = '#f7f7f7';
@@ -249,26 +387,28 @@ class DinoGame {
         // Spawn de obstáculos
         this.spawnCounter++;
         if (this.spawnCounter > this.obstacleSpawnRate) {
-            const types = ['cactus-small', 'cactus-large', 'bird'];
+            const types = this.isHardMode
+                ? ['cactus-small', 'cactus-large', 'bird', 'cactus-double']
+                : ['cactus-small', 'cactus-large', 'bird'];
             const randomType = types[Math.floor(Math.random() * types.length)];
-            
-            let height = 30;
-            if (randomType === 'cactus-large') height = 50;
-            if (randomType === 'bird') height = 12;
 
-            this.obstacles.push({
-                x: this.gameCanvas.width,
-                y: randomType === 'bird' ? this.groundLevel - 40 : this.groundLevel,
-                width: randomType === 'bird' ? 20 : 15,
-                height: height,
-                type: randomType
-            });
+            this.obstacles.push(this.createObstacle(randomType));
+
+            // En modo difícil, a veces genera un segundo obstáculo cercano.
+            if (this.isHardMode && Math.random() < 0.35) {
+                const chainedTypes = ['cactus-small', 'cactus-large', 'bird'];
+                const chainedType = chainedTypes[Math.floor(Math.random() * chainedTypes.length)];
+                const chainOffset = 70 + Math.floor(Math.random() * 70);
+                this.obstacles.push(this.createObstacle(chainedType, chainOffset));
+            }
+
             this.spawnCounter = 0;
         }
 
         // Actualizar y dibujar obstáculos
         for (let i = this.obstacles.length - 1; i >= 0; i--) {
-            this.obstacles[i].x -= this.gameSpeed;
+            const speedMultiplier = this.obstacles[i].speedMultiplier || 1;
+            this.obstacles[i].x -= this.gameSpeed * speedMultiplier;
 
             this.drawObstacle(this.obstacles[i]);
 
@@ -288,6 +428,11 @@ class DinoGame {
                     this.gameSpeed += 0.5;
                     this.obstacleSpawnRate = Math.max(60, this.obstacleSpawnRate - 3);
                 }
+
+                if (this.isHardMode && this.score >= 250 && !this.secondChanceSent) {
+                    this.secondChanceSent = true;
+                    this.unlockSecondChance();
+                }
             }
         }
 
@@ -299,12 +444,16 @@ class DinoGame {
         }
 
         this.frameCount++;
-        requestAnimationFrame(this.gameLoop);
+        this.animationFrameId = requestAnimationFrame(this.gameLoop);
     }
 
     endGame() {
         this.gameRunning = false;
         this.gameOver = true;
+        if (this.animationFrameId !== null) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
         if (this.retryButton) {
             this.retryButton.hidden = false;
         }
@@ -324,16 +473,22 @@ class DinoGame {
     }
 
     restartGame() {
+        this.gameRunning = false;
+        if (this.animationFrameId !== null) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
+
         this.score = 0;
-        this.gameSpeed = 6;
         this.obstacles = [];
         this.isJumping = false;
         this.velocityY = 0;
-        this.obstacleSpawnRate = 120;
+        this.applyModeSettings();
         this.spawnCounter = 0;
         this.dinoY = this.groundLevel;
         this.frameCount = 0;
         this.gameOver = false;
+        this.secondChanceSent = false;
         this.generateClouds();
         if (this.retryButton) {
             this.retryButton.hidden = true;
@@ -343,11 +498,42 @@ class DinoGame {
             scoreValue.textContent = '0';
         }
         this.gameRunning = true;
-        this.gameLoop();
+        this.animationFrameId = requestAnimationFrame(this.gameLoop);
+    }
+
+    async unlockSecondChance() {
+        try {
+            const payload = new URLSearchParams({
+                score: String(this.score),
+                hard_mode: '1'
+            });
+
+            const response = await fetch('api_segunda_oportunidad.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: payload.toString(),
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'No se pudo desbloquear segunda oportunidad.');
+            }
+
+            this.showStatus('Segunda oportunidad desbloqueada por 24 horas para tu IP.');
+        } catch (error) {
+            this.showStatus(error.message || 'Error al desbloquear segunda oportunidad.');
+        }
     }
 
     closeGame() {
         this.gameRunning = false;
+        if (this.animationFrameId !== null) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
+        }
         this.isGameActive = false;
         if (this.gameContainer) {
             this.gameContainer.remove();

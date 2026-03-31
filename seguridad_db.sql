@@ -34,6 +34,19 @@ CREATE TABLE IF NOT EXISTS captcha_log (
     INDEX idx_ip_fecha (ip_address, fecha_intento)
 );
 
+-- Tabla para desbloqueos de segunda oportunidad por IP
+CREATE TABLE IF NOT EXISTS segunda_oportunidad (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    ip_address VARCHAR(45) NOT NULL UNIQUE,
+    score INT NOT NULL,
+    hard_mode BOOLEAN DEFAULT FALSE,
+    desbloqueado_hasta DATETIME NOT NULL,
+    usado BOOLEAN DEFAULT FALSE,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_ip (ip_address),
+    INDEX idx_desbloqueado_hasta (desbloqueado_hasta)
+);
+
 -- Alter table citas para adicionar campos de seguimiento
 ALTER TABLE citas ADD COLUMN IF NOT EXISTS verificado BOOLEAN DEFAULT FALSE;
 ALTER TABLE citas ADD COLUMN IF NOT EXISTS ip_creacion VARCHAR(45);

@@ -145,10 +145,33 @@ $ipLimitResult = mysqli_stmt_get_result($checkIpLimitStmt);
 $ipLimitRow = mysqli_fetch_assoc($ipLimitResult);
 mysqli_stmt_close($checkIpLimitStmt);
 
-if ($ipLimitRow['citas'] >= 10) {
-    http_response_code(429);
-    echo json_encode(['error' => 'Demasiados intentos desde esta IP. Intenta más tarde.']);
-    exit;
+$segundaOportunidadId = null;
+if ($ipLimitRow['citas'] >= 2) {
+    $checkSecondChanceStmt = mysqli_prepare($conn,
+        "SELECT id FROM segunda_oportunidad
+         WHERE ip_address = ? AND usado = FALSE AND desbloqueado_hasta > NOW()
+         LIMIT 1"
+    );
+
+    if ($checkSecondChanceStmt) {
+        mysqli_stmt_bind_param($checkSecondChanceStmt, 's', $client_ip);
+        mysqli_stmt_execute($checkSecondChanceStmt);
+        $secondChanceResult = mysqli_stmt_get_result($checkSecondChanceStmt);
+        $secondChanceRow = mysqli_fetch_assoc($secondChanceResult);
+        mysqli_stmt_close($checkSecondChanceStmt);
+
+        if ($secondChanceRow && isset($secondChanceRow['id'])) {
+            $segundaOportunidadId = (int)$secondChanceRow['id'];
+        }
+    }
+
+    if ($segundaOportunidadId === null) {
+        http_response_code(429);
+        echo json_encode([
+            'error' => 'Limite alcanzado: maximo 2 citas por IP en 24 horas. Para una segunda oportunidad, alcanza 1000 puntos en modo dificil del easter egg en inicio.'
+        ]);
+        exit;
+    }
 }
 
 // ============================================
@@ -193,6 +216,15 @@ if (!$stmt) {
 mysqli_stmt_bind_param($stmt, 'sssss', $nombre, $email, $servicio, $fecha, $client_ip);
 
 if (mysqli_stmt_execute($stmt)) {
+    if ($segundaOportunidadId !== null) {
+        $consumeSecondChanceStmt = mysqli_prepare($conn, 'UPDATE segunda_oportunidad SET usado = TRUE WHERE id = ?');
+        if ($consumeSecondChanceStmt) {
+            mysqli_stmt_bind_param($consumeSecondChanceStmt, 'i', $segundaOportunidadId);
+            mysqli_stmt_execute($consumeSecondChanceStmt);
+            mysqli_stmt_close($consumeSecondChanceStmt);
+        }
+    }
+
     http_response_code(200);
     echo json_encode(['mensaje' => 'Cita programada con éxito.']);
 } else {

@@ -466,6 +466,17 @@
     color: #506172;
 }
 
+.agenda-limit-note {
+    margin: 0 0 10px;
+    padding: 10px 12px;
+    background: #fff6de;
+    border: 1px solid #efd9a1;
+    border-radius: 8px;
+    color: #5f4a1e;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
 .recaptcha-note-tramites a {
     color: #667eea;
     text-decoration: none;
