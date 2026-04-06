@@ -146,7 +146,7 @@ $ipLimitRow = mysqli_fetch_assoc($ipLimitResult);
 mysqli_stmt_close($checkIpLimitStmt);
 
 $segundaOportunidadId = null;
-if ($ipLimitRow['citas'] >= 2) {
+if ($ipLimitRow['citas'] >= 5) {
     $checkSecondChanceStmt = mysqli_prepare($conn,
         "SELECT id FROM segunda_oportunidad
          WHERE ip_address = ? AND usado = FALSE AND desbloqueado_hasta > NOW()
@@ -168,7 +168,7 @@ if ($ipLimitRow['citas'] >= 2) {
     if ($segundaOportunidadId === null) {
         http_response_code(429);
         echo json_encode([
-            'error' => 'Limite alcanzado: maximo 2 citas por IP en 24 horas. Para una segunda oportunidad, alcanza 1000 puntos en modo dificil del easter egg en inicio.'
+            'error' => 'Limite alcanzado: maximo 5 citas por IP en 24 horas. Para una segunda oportunidad, alcanza 1000 puntos en modo dificil del easter egg en inicio.'
         ]);
         exit;
     }
