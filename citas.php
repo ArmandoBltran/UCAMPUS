@@ -128,13 +128,7 @@ $emailLimitResult = mysqli_stmt_get_result($checkEmailLimitStmt);
 $emailLimitRow = mysqli_fetch_assoc($emailLimitResult);
 mysqli_stmt_close($checkEmailLimitStmt);
 
-if ($emailLimitRow['citas'] >= 5) {
-    http_response_code(429);
-    echo json_encode(['error' => 'Has alcanzado el límite de citas. Máximo 5 por semana.']);
-    exit;
-}
-
-// Máximo 10 citas por IP en 24 horas
+// Máximo 5 citas por IP en 24 horas
 $checkIpLimitStmt = mysqli_prepare($conn,
     "SELECT COUNT(*) as citas FROM citas 
      WHERE ip_creacion = ? AND fecha_creacion > DATE_SUB(NOW(), INTERVAL 1 DAY)"
@@ -146,7 +140,10 @@ $ipLimitRow = mysqli_fetch_assoc($ipLimitResult);
 mysqli_stmt_close($checkIpLimitStmt);
 
 $segundaOportunidadId = null;
-if ($ipLimitRow['citas'] >= 5) {
+$emailLimitReached = ((int)$emailLimitRow['citas'] >= 5);
+$ipLimitReached = ((int)$ipLimitRow['citas'] >= 5);
+
+if ($emailLimitReached || $ipLimitReached) {
     $checkSecondChanceStmt = mysqli_prepare($conn,
         "SELECT id FROM segunda_oportunidad
          WHERE ip_address = ? AND usado = FALSE AND desbloqueado_hasta > NOW()
@@ -167,9 +164,15 @@ if ($ipLimitRow['citas'] >= 5) {
 
     if ($segundaOportunidadId === null) {
         http_response_code(429);
-        echo json_encode([
-            'error' => 'Limite alcanzado: maximo 5 citas por IP en 24 horas. Para una segunda oportunidad, alcanza 1000 puntos en modo dificil del easter egg en inicio.'
-        ]);
+        if ($emailLimitReached) {
+            echo json_encode([
+                'error' => 'Has alcanzado el limite de citas. Maximo 5 por semana. Para una sexta cita, desbloquea segunda oportunidad en el easter egg del inicio (250 puntos en modo dificil).'
+            ]);
+        } else {
+            echo json_encode([
+                'error' => 'Limite alcanzado: maximo 5 citas por IP en 24 horas. Para una sexta cita, desbloquea segunda oportunidad en el easter egg del inicio (250 puntos en modo dificil).'
+            ]);
+        }
         exit;
     }
 }

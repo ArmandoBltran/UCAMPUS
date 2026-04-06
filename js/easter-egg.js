@@ -25,6 +25,8 @@ class DinoGame {
         this.statusMessage = null;
         this.isHardMode = false;
         this.jumpStrength = -15;
+        this.maxJumps = 1;
+        this.jumpsUsed = 0;
         this.secondChanceSent = false;
         this.animationFrameId = null;
     }
@@ -35,11 +37,13 @@ class DinoGame {
             this.obstacleSpawnRate = 85;
             this.gravity = 0.72;
             this.jumpStrength = -16;
+            this.maxJumps = 2;
         } else {
             this.gameSpeed = 6;
             this.obstacleSpawnRate = 120;
             this.gravity = 0.6;
             this.jumpStrength = -15;
+            this.maxJumps = 1;
         }
     }
 
@@ -97,7 +101,7 @@ class DinoGame {
                 this.isHardMode = !this.isHardMode;
                 this.modeButton.textContent = this.isHardMode ? 'Modo: Dificil' : 'Modo: Normal';
                 this.showStatus(this.isHardMode
-                    ? 'Modo dificil activado: aves bajas, obstaculos encadenados y velocidad variable. Llega a 250 puntos para desbloquear segunda oportunidad de cita.'
+                    ? 'Modo dificil activado: doble salto habilitado. Llega a 250 puntos para desbloquear otra cita.'
                     : 'Modo normal activado.');
                 this.restartGame();
             });
@@ -140,10 +144,13 @@ class DinoGame {
     }
 
     jump() {
-        if (!this.isJumping && this.gameRunning) {
-            this.isJumping = true;
-            this.velocityY = this.jumpStrength;
+        if (!this.gameRunning || this.jumpsUsed >= this.maxJumps) {
+            return;
         }
+
+        this.isJumping = true;
+        this.velocityY = this.jumpStrength;
+        this.jumpsUsed += 1;
     }
 
     duck() {
@@ -378,6 +385,7 @@ class DinoGame {
                 this.dinoY = this.groundLevel;
                 this.isJumping = false;
                 this.velocityY = 0;
+                this.jumpsUsed = 0;
             }
         }
 
@@ -483,6 +491,7 @@ class DinoGame {
         this.obstacles = [];
         this.isJumping = false;
         this.velocityY = 0;
+        this.jumpsUsed = 0;
         this.applyModeSettings();
         this.spawnCounter = 0;
         this.dinoY = this.groundLevel;
