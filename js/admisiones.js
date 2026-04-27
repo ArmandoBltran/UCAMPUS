@@ -57,7 +57,7 @@
                 duracion: "3 años",
                 horario: "Matutino",
                 perfil: "En el Bachillerato Técnico en Mantenimiento Industrial los alumnos aprenderán a realizar el mantenimiento a instalaciones eléctricas, fabricar pequeñas estructuras metálicas, realizar actividades de ajuste de banco haciendo uso de herramientas básicas, interpretar planos de piezas mecánicas, utilizar máquinas herramientas convencionales y de control numérico para reparación, manejar máquinas de soldar de arco eléctrico, manipular sistemas de control y automatización, sistemas de neumática e hidráulica, mantener equipos de refrigeración y aire acondicionado e implementara los programas de administración del mantenimiento en los sistemas.",
-                planHref: "https://ucarolina.edu.mx/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbEFEIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--79378010e99608fe3a15711f1faceb3d8bcd74cc/Bach-Te%CC%81cnico%20en%20Mantenimiento-2025.pdf,",
+                planHref: "https://ucarolina.edu.mx/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbFVFIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c11691e0c15ce55b7b6a7e2f7d34352f9113f8db/Bach-Te%CC%81cnico%20en%20Mantenimiento-2025.pdf,",
                 pdfHref: "https://ucarolina.edu.mx/rvoes/RVOE-0527257113.pdf"
             },
             programacion: {
@@ -66,7 +66,7 @@
                 duracion: "3 años",
                 horario: "Matutino",
                 perfil: "Aprenderá a analizar, diseñar, desarrollar, instalar y mantener software de aplicación, convirtiendo ideas y necesidades en soluciones tecnológicas eficientes. Desarrollará habilidades en programación, bases de datos y arquitectura de software, utilizando lenguajes y metodologías actualizadas para crear aplicaciones innovadoras y funcionales. Su formación incluirá el uso de herramientas de desarrollo ágil, ciberseguridad y computación en la nube, preparándolo para responder a las demandas de la transformación digital. Con un enfoque práctico y orientado a la resolución de problemas, estará listo para integrarse a la industria tecnológica o emprender proyectos propios con una visión estratégica e innovadora.",
-                planHref: "https://ucarolina.edu.mx/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbUFEIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--ddd5fbf6dce74fc318f927dfe813eb152e38498c/Bach-Programacio%CC%81n-2025.pdf,",
+                planHref: "eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdDVG9JYTJWNVNTSWhOR0kyWVRJNGNERnRaelZwYW5Kek9YY3plbWxyWVROMFpITTNlUVk2QmtWVU9oQmthWE53YjNOcGRHbHZia2tpZEdsdWJHbHVaVHNnWm1sc1pXNWhiV1U5SWtKaFkyZ3RWR1VsTTBaamJtbGpieUJsYmlCQmNuUmxjeTB5TURJMUxuQmtaaUk3SUdacGJHVnVZVzFsS2oxVlZFWXRPQ2NuUW1GamFDMVVaU1ZEUXlVNE1XTnVhV052SlRJd1pXNGxNakJCY25SbGN5MHlNREkxTG5Ca1pnWTdCbFE2RVdOdmJuUmxiblJmZEhsd1pVa2lGR0Z3Y0d4cFkyRjBhVzl1TDNCa1pnWTdCbFE2RVhObGNuWnBZMlZmYm1GdFpUb0tiRzlqWVd3PSIsImV4cCI6IjIwMjYtMDQtMjdUMDU6MDY6NDcuMDk0WiIsInB1ciI6ImJsb2Jfa2V5In19",
                 pdfHref: "https://ucarolina.edu.mx/rvoes/RVOE-0527257114.pdf"
             },
             cienciasArtesDigitales: {
@@ -75,7 +75,7 @@
                 duracion: "3 años",
                 horario: "Matutino",
                 perfil: "Aprenderá a integrar creatividad, técnica y visión estratégica para desarrollar contenidos digitales innovadores que respondan a las demandas del mundo visual y tecnológico actual. A través del dominio de procesos creativos, diseño gráfico, técnicas fotográficas, retoque digital, diseño editorial, ilustración, edición de video y animación, el egresado podrá participar activamente en medios de comunicación, agencias creativas, estudios audiovisuales o emprender sus propios proyectos visuales. Será capaz de operar cámaras de video, crear efectos especiales y gráficos en movimiento, colaborar en campañas de marketing digital y utilizar herramientas de análisis y métricas para mejorar el impacto de los contenidos. Su formación le permitirá continuar estudios superiores en áreas como diseño, comunicación visual, producción digital o publicidad, consolidando un perfil artístico-tecnológico que lo posiciona en entornos creativos con visión crítica, estética e innovadora.",
-                planHref: "https://ucarolina.edu.mx/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBazREIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bba17054efbe1dd5633205d3bf084430f4fe7d2a/Bach-Te%CC%81cnico%20en%20Artes-2025.pdf,",
+                planHref: "https://ucarolina.edu.mx/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbE1FIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0f32f33254c79f446af892c50218e07aeca84050/Bach-Te%CC%81cnico%20en%20Artes-2025.pdf,",
                 pdfHref: "https://ucarolina.edu.mx/rvoes/RVOE-0527257111.pdf"
             },
             ventas: {

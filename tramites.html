@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/estiloscomunes.css?v=20260318">
         <link rel="stylesheet" href="css/inicio-estilos.css?v=20260317">
-        <link rel="stylesheet" href="css/tramites-estilos.css?v=20260330">
+        <link rel="stylesheet" href="css/tramites-estilos.css?v=20260426">
         <link rel="icon" type="image/png" href="universidad-carolina-logo.png?v=20260336">
         <link rel="shortcut icon" href="universidad-carolina-logo.png?v=20260336">
         <link rel="apple-touch-icon" href="universidad-carolina-logo.png?v=20260336">
@@ -218,6 +218,19 @@
 
                         <button type="submit" class="confirm-btn">Confirmar cita</button>
                         <p id="appointment-message" class="appointment-message" aria-live="polite"></p>
+
+                        <section id="appointment-receipt" class="appointment-receipt" hidden aria-live="polite">
+                            <p class="appointment-receipt-title">Comprobante de cita programada</p>
+                            <ul class="appointment-receipt-list">
+                                <li><strong>Nombre:</strong> <span id="receipt-name">-</span></li>
+                                <li><strong>Correo:</strong> <span id="receipt-email">-</span></li>
+                                <li><strong>Servicio:</strong> <span id="receipt-service">-</span></li>
+                                <li><strong>Fecha:</strong> <span id="receipt-date">-</span></li>
+                                <li><strong>Hora:</strong> <span id="receipt-time">-</span></li>
+                            </ul>
+                            <p class="appointment-receipt-note">Toma una captura de estos datos para recordar tu cita.</p>
+                            <button type="button" id="clear-receipt-btn" class="clear-receipt-btn" hidden>Ya tome captura de la informacion</button>
+                        </section>
                     </form>
                 </div>
             </section>
@@ -261,7 +274,7 @@
         </footer>
         <!-- reCAPTCHA Checkbox Script -->
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        <script src="js/tramites.js?v=20260330"></script>
+        <script src="js/tramites.js?v=20260426"></script>
     </body>
 </html>
 

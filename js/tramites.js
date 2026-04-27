@@ -117,6 +117,13 @@
     const dateInput = document.getElementById('appointment-date');
     const selectedTimeText = document.getElementById('selected-time-text');
     const message = document.getElementById('appointment-message');
+    const receipt = document.getElementById('appointment-receipt');
+    const receiptName = document.getElementById('receipt-name');
+    const receiptEmail = document.getElementById('receipt-email');
+    const receiptService = document.getElementById('receipt-service');
+    const receiptDate = document.getElementById('receipt-date');
+    const receiptTime = document.getElementById('receipt-time');
+    const clearReceiptButton = document.getElementById('clear-receipt-btn');
     const slotButtons = Array.from(document.querySelectorAll('.slot-btn'));
     let selectedSlotTime = '';
 
@@ -147,6 +154,59 @@
                 resetSlotSelection();
             }
         });
+    }
+
+    function formatDateForReceipt(dateValue) {
+        if (!dateValue) {
+            return '-';
+        }
+
+        const [year, month, day] = dateValue.split('-').map(Number);
+        const parsedDate = new Date(year, month - 1, day);
+
+        if (Number.isNaN(parsedDate.getTime())) {
+            return dateValue;
+        }
+
+        return new Intl.DateTimeFormat('es-MX', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        }).format(parsedDate);
+    }
+
+    function renderAppointmentReceipt(details) {
+        if (!receipt || !receiptName || !receiptEmail || !receiptService || !receiptDate || !receiptTime) {
+            return;
+        }
+
+        receiptName.textContent = details.name || '-';
+        receiptEmail.textContent = details.email || '-';
+        receiptService.textContent = details.service || '-';
+        receiptDate.textContent = formatDateForReceipt(details.date || '');
+        receiptTime.textContent = details.time || '-';
+        receipt.hidden = false;
+        if (clearReceiptButton) {
+            clearReceiptButton.hidden = false;
+        }
+    }
+
+    function clearAppointmentReceipt() {
+        if (!receipt || !receiptName || !receiptEmail || !receiptService || !receiptDate || !receiptTime) {
+            return;
+        }
+
+        receiptName.textContent = '-';
+        receiptEmail.textContent = '-';
+        receiptService.textContent = '-';
+        receiptDate.textContent = '-';
+        receiptTime.textContent = '-';
+        receipt.hidden = true;
+
+        if (clearReceiptButton) {
+            clearReceiptButton.hidden = true;
+        }
     }
 
     async function refreshSlotsForDate() {
@@ -200,6 +260,14 @@
         });
     });
 
+    if (clearReceiptButton) {
+        clearReceiptButton.addEventListener('click', () => {
+            clearAppointmentReceipt();
+            message.textContent = 'Comprobante ocultado del sitio. Tus datos siguen guardados en el sistema.';
+            message.className = 'appointment-message success';
+        });
+    }
+
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
         message.className = 'appointment-message';
@@ -221,6 +289,8 @@
         const email = document.getElementById('appointment-email').value.trim();
         const serviceSelect = document.getElementById('appointment-service');
         const serviceText = serviceSelect.options[serviceSelect.selectedIndex].text;
+        const selectedSlotButton = slotButtons.find((item) => item.classList.contains('active'));
+        const selectedSlotLabel = selectedSlotButton ? selectedSlotButton.textContent.trim() : selectedSlotTime;
         const fechaHora = `${dateInput.value} ${selectedSlotTime}:00`;
 
         // Sincroniza el hidden con la variable antes de enviar al backend.
@@ -260,6 +330,13 @@
 
             message.textContent = data.mensaje || `Cita apartada para ${name} el ${dateInput.value} a las ${selectedSlotTime}. Te contactaremos en ${email} para confirmar (${serviceText}).`;
             message.classList.add('success');
+            renderAppointmentReceipt({
+                name,
+                email,
+                service: serviceText,
+                date: dateInput.value,
+                time: selectedSlotLabel
+            });
             form.reset();
             if (typeof grecaptcha !== 'undefined') {
                 grecaptcha.reset();
@@ -277,5 +354,6 @@
     });
 
     setUnavailableSlots([]);
+    clearAppointmentReceipt();
 })();
 

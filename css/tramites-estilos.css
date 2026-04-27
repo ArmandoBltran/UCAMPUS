@@ -299,6 +299,58 @@
     color: #ad3a3a;
 }
 
+.appointment-receipt {
+    margin-top: 14px;
+    padding: 14px;
+    border: 1px solid #c9dcdf;
+    border-radius: 10px;
+    background: #f4fbf9;
+}
+
+.appointment-receipt-title {
+    margin: 0 0 10px;
+    color: #274f43;
+    font-weight: 700;
+}
+
+.appointment-receipt-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #2f3f4f;
+    line-height: 1.45;
+}
+
+.appointment-receipt-list li + li {
+    margin-top: 4px;
+}
+
+.appointment-receipt-note {
+    margin: 10px 0 0;
+    color: #3f5d53;
+    font-weight: 600;
+}
+
+.clear-receipt-btn {
+    margin-top: 12px;
+    border: 1px solid #9bbeb3;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #2d5448;
+    font: inherit;
+    font-weight: 700;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 120ms ease;
+}
+
+.clear-receipt-btn:hover,
+.clear-receipt-btn:focus-visible {
+    background: #eaf6f2;
+    border-color: #7ca999;
+    transform: translateY(-1px);
+    outline: none;
+}
+
 /* ========================================
    ESTILOS PARA VERIFICACIÓN SEGURA DE EMAIL
    ======================================== */
